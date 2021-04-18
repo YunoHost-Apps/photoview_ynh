@@ -1,7 +1,7 @@
-SOURCE_URL=url of app's source
-SOURCE_SUM=sha256 checksum
+SOURCE_URL=https://github.com/photoview/photoview/archive/refs/tags/v2.3.0.tar.gz
+SOURCE_SUM=7d51378a70f4cbe768c69f9c8546b60d4d6882b1e584dea117b47039a133eac9
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=tar.gz
 SOURCE_IN_SUBDIR=true
-SOURCE_FILENAME=
+SOURCE_FILENAME=v2.3.0.tar.gz
 SOURCE_EXTRACT=true

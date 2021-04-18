@@ -1,0 +1,7 @@
+SOURCE_URL=https://github.com/strukturag/libheif/releases/download/v1.11.0/libheif-1.11.0.tar.gz
+SOURCE_SUM=c550938f56ff6dac83702251a143f87cb3a6c71a50d8723955290832d9960913
+SOURCE_SUM_PRG=sha256sum
+SOURCE_FORMAT=tar.gz
+SOURCE_IN_SUBDIR=true
+SOURCE_FILENAME=libheif-1.11.0.tar.gz
+SOURCE_EXTRACT=true

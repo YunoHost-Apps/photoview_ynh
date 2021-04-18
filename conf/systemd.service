@@ -1,13 +1,14 @@
 [Unit]
-Description=Small description of the service
-After=network.target
+Description=Photoview photo manager API
+After=network.target mysql.service
 
 [Service]
 Type=simple
 User=__APP__
 Group=__APP__
-WorkingDirectory=__FINALPATH__/
-ExecStart=__FINALPATH__/script
+WorkingDirectory=__FINALPATH__/output
+EnvironmentFile=__FINALPATH__/output/.env
+ExecStart=/usr/bin/env bash -c "LD_LIBRARY_PATH=__FINALPATH__/local/lib:$LD_LIBRARY_PATH __FINALPATH__/output/photoview"
 StandardOutput=append:/var/log/__APP__/__APP__.log
 StandardError=inherit
 

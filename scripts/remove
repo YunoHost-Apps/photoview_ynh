@@ -111,9 +111,9 @@ ynh_remove_go
 #=================================================
 # REMOVE NODE
 #=================================================
-ynh_script_progression --message="Removing Node.jss..." --weight=1
+ynh_script_progression --message="Removing Node.js..." --weight=1
 
-ynh_remove_node
+ynh_remove_nodejs
 
 #=================================================
 # GENERIC FINALIZATION

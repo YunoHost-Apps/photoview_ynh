@@ -51,7 +51,10 @@ function build_api {
 
 	pushd "$final_path/api" || ynh_die
 		chown -R $app:$app "$final_path"
-		sudo -u $app env "PATH=$go_path_full" "LIBRARY_PATH=$heif_lib_path" "LD_LIBRARY_PATH=$heif_ld_lib_path" "CGO_CFLAGS=$heif_cgo_cflags" GOENV_VERSION=$go_version CGO_ENABLED=1 go mod download  2>&1
+		set +e ; for i in {1..5}; do
+			sudo -u $app env "PATH=$go_path_full" "LIBRARY_PATH=$heif_lib_path" "LD_LIBRARY_PATH=$heif_ld_lib_path" "CGO_CFLAGS=$heif_cgo_cflags" GOENV_VERSION=$go_version CGO_ENABLED=1 go mod download  2>&1 && break
+			sleep 5
+		done; set -e
 		sudo -u $app env "PATH=$go_path_full" "LIBRARY_PATH=$heif_lib_path" "LD_LIBRARY_PATH=$heif_ld_lib_path" "CGO_CFLAGS=$heif_cgo_cflags" GOENV_VERSION=$go_version CGO_ENABLED=1 go install github.com/mattn/go-sqlite3 github.com/Kagami/go-face 2>&1
 		sudo -u $app env "PATH=$go_path_full" "LIBRARY_PATH=$heif_lib_path" "LD_LIBRARY_PATH=$heif_ld_lib_path" "CGO_CFLAGS=$heif_cgo_cflags" GOENV_VERSION=$go_version go build -o photoview "$final_path/api" 2>&1
 	popd || ynh_die

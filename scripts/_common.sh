@@ -5,7 +5,7 @@
 #=================================================
 
 # dependencies used by the app
-pkg_dependencies="curl gpg libdlib19 ffmpeg exiftool libheif1 darktable ca-certificates golang libdlib-dev libblas-dev liblapack-dev libjpeg-dev libheif-dev build-essential libx265-dev libde265-dev libaom-dev"
+pkg_dependencies="curl gpg libdlib19 ffmpeg exiftool libheif1 darktable ca-certificates golang libdlib-dev libblas-dev liblapack-dev libjpeg-dev libheif-dev build-essential pkg-config autoconf automake libx265-dev libde265-dev libaom-dev"
 
 #=================================================
 # PERSONAL HELPERS

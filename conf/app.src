@@ -1,7 +1,7 @@
-SOURCE_URL=https://github.com/photoview/photoview/archive/refs/tags/v2.3.0.tar.gz
-SOURCE_SUM=7d51378a70f4cbe768c69f9c8546b60d4d6882b1e584dea117b47039a133eac9
+SOURCE_URL=https://github.com/photoview/photoview/archive/refs/tags/v2.3.1.tar.gz
+SOURCE_SUM=adc0f130afb70f1dcf5b49b9641b603cdea4c218a8fa545ed3efbb8b65bd6cb7
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=tar.gz
 SOURCE_IN_SUBDIR=true
-SOURCE_FILENAME=v2.3.0.tar.gz
+SOURCE_FILENAME=v2.3.1.tar.gz
 SOURCE_EXTRACT=true

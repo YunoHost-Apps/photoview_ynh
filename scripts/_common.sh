@@ -77,6 +77,7 @@ function build_ui {
 		chown -R $app:$app $final_path
 		sudo -u $app touch $ui_path/.yarnrc
 		sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" install 2>&1
+		sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" add graphql 2>&1
 		sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" run build 2>&1
 	popd || ynh_die
 
@@ -100,7 +101,7 @@ function set_permissions {
 	chown -R $app:$app "$data_path"
 
 	mkdir -p /var/log/$app
-	chmod -R o-rwx  /var/log/$app
+	chmod -R o-rwx /var/log/$app
 }
 
 #=================================================

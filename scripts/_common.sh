@@ -82,7 +82,7 @@ function build_ui {
 		sudo -u $app touch $ui_path/.yarnrc
 		sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" install 2>&1
 		sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" add graphql 2>&1
-		sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" run build 2>&1
+		grep -q "build complete" <((sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" run build -- --public-url "$path_url" 2>&1 & echo $! >&3 ) 3>pid) ; kill "$(<pid)"
 	popd || ynh_die
 
 	cp -rT "$final_path/ui/dist" "$final_path/output/ui"

@@ -16,7 +16,7 @@
 		setup_private=1
 		setup_public=1
 		upgrade=1
-		upgrade=0	from_commit=CommitHash
+		upgrade=1	from_commit=069fc840e413e1d2cf80616498bcc052e05616a1
 		backup_restore=1
 		multi_instance=1
 		port_already_use=0
@@ -25,7 +25,7 @@
 Email=
 Notification=none
 ;;; Upgrade options
-	; commit=CommitHash
-		name=Name and date of the commit.
-		manifest_arg=domain=DOMAIN&is_public=1&mapbox_token=
+	; commit=069fc840e413e1d2cf80616498bcc052e05616a1
+		name="Version 2.3.2"
+		manifest_arg=domain=domain.tld&is_public=1&mapbox_token=
 

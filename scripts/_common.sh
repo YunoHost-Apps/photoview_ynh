@@ -16,6 +16,7 @@ fi
 #=================================================
 
 function setup_sources {
+	ynh_secure_remove "$final_path"
 	ynh_setup_source --dest_dir="$final_path"
 	ynh_setup_source --source_id=libheif --dest_dir="$final_path/libheif"
 

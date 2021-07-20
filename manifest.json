@@ -4,7 +4,7 @@
     "packaging_format": 1,
     "description": {
         "en": "Simple and user-friendly photo gallery that's made for photographers ",
-        "fr": "Galerie photos simple et facile à utilizer, faite pour les photographes"
+        "fr": "Galerie photos simple et facile à utiliser, faite pour les photographes"
     },
     "version": "2.3.4~ynh1",
     "url": "https://photoview.github.io/",

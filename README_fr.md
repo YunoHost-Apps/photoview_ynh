@@ -11,7 +11,7 @@ Si vous n'avez pas YunoHost, consultez [le guide](https://yunohost.org/#/install
 ## Vue d'ensemble
 Photoview est une galerie photos simple et facile à utiliser, conçue pour les photographes et qui vise à fournir un moyen simple et rapide pour naviguer dans les dossiers contenant des milliers de photos haute résolution.
 
-**Version incluse :** 2.3.4
+**Version incluse :** 2.3.5
 
 ## Captures d'écran
 

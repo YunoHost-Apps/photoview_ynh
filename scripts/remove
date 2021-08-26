@@ -45,6 +45,14 @@ ynh_script_progression --message="Stopping and removing the systemd service..." 
 ynh_remove_systemd_config
 
 #=================================================
+# REMOVE LOGROTATE CONFIGURATION
+#=================================================
+ynh_script_progression --message="Removing logrotate configuration..." --weight=1
+
+# Remove the app-specific logrotate config
+ynh_remove_logrotate
+
+#=================================================
 # REMOVE THE MYSQL DATABASE
 #=================================================
 ynh_script_progression --message="Removing the MySQL database..." --weight=1
@@ -58,6 +66,8 @@ ynh_mysql_remove_db --db_user=$db_user --db_name=$db_name
 ynh_script_progression --message="Removing dependencies..." --weight=5
 
 # Remove metapackage and its dependencies
+ynh_remove_go
+ynh_remove_nodejs
 ynh_remove_app_dependencies
 
 #=================================================
@@ -69,14 +79,6 @@ ynh_script_progression --message="Removing app main directory..." --weight=1
 ynh_secure_remove --file="$final_path"
 
 #=================================================
-# REMOVE APP DATA DIR
-#=================================================
-ynh_script_progression --message="Removing app data directory..." --weight=1
-
-# Remove the app directory securely
-ynh_secure_remove --file="$data_path"
-
-#=================================================
 # REMOVE NGINX CONFIGURATION
 #=================================================
 ynh_script_progression --message="Removing NGINX web server configuration..." --weight=1
@@ -85,35 +87,22 @@ ynh_script_progression --message="Removing NGINX web server configuration..." --
 ynh_remove_nginx_config
 
 #=================================================
-# REMOVE LOGROTATE CONFIGURATION
-#=================================================
-ynh_script_progression --message="Removing logrotate configuration..." --weight=1
-
-# Remove the app-specific logrotate config
-ynh_remove_logrotate
-
-#=================================================
 # SPECIFIC REMOVE
 #=================================================
 # REMOVE VARIOUS FILES
 #=================================================
+ynh_script_progression --message="Removing various files..."
 
 # Remove the log files
 ynh_secure_remove --file="/var/log/$app"
 
 #=================================================
-# REMOVE GO
+# REMOVE APP DATA DIR
 #=================================================
-ynh_script_progression --message="Removing Go..." --weight=1
+ynh_script_progression --message="Removing app data directory..." --weight=1
 
-ynh_remove_go
-
-#=================================================
-# REMOVE NODE
-#=================================================
-ynh_script_progression --message="Removing Node.js..." --weight=1
-
-ynh_remove_nodejs
+# Remove the app directory securely
+ynh_secure_remove --file="$data_path"
 
 #=================================================
 # GENERIC FINALIZATION

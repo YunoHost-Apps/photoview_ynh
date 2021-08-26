@@ -56,7 +56,7 @@ ynh_app_setting_set --app=$app --key=mapbox_token --value=$mapbox_token
 #=================================================
 # STANDARD MODIFICATIONS
 #=================================================
-# FIND PORTS
+# FIND AND OPEN A PORT
 #=================================================
 ynh_script_progression --message="Finding an available port..." --weight=1
 
@@ -78,7 +78,7 @@ ynh_install_extra_app_dependencies --repo="deb https://dl.yarnpkg.com/debian/ st
 ynh_script_progression --message="Configuring system user..." --weight=1
 
 # Create a system user
-ynh_system_user_create --username=$app --home_dir="$final_path"
+ynh_system_user_create --username=$app --home_dir=$final_path
 
 #=================================================
 # CREATE A MYSQL DATABASE
@@ -132,20 +132,21 @@ ynh_script_progression --message="Building static UI files..." --weight=45
 build_ui
 
 #=================================================
+# ADD A CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding a configuration file..."
+
+ynh_add_config --template=".env" --destination="$final_path/output/.env"
+
+set_permissions
+
+#=================================================
 # SETUP SYSTEMD
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..." --weight=1
 
 # Create a dedicated systemd config
-ynh_add_systemd_config --service=$app
-
-#=================================================
-# ADD A CONFIGURATION
-#=================================================
-
-ynh_add_config --template=".env" --destination="$final_path/output/.env"
-
-set_permissions
+ynh_add_systemd_config
 
 #=================================================
 # GENERIC FINALIZATION

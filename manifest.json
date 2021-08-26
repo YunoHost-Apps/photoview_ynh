@@ -8,6 +8,13 @@
     },
     "version": "2.3.5~ynh1",
     "url": "https://photoview.github.io/",
+    "upstream": {
+        "license": "AGPL-3.0-only",
+        "website": "https://photoview.github.io/",
+        "demo": "https://photos.qpqp.dk/",
+        "admindoc": "https://photoview.github.io/docs/",
+        "code": "https://github.com/photoview/photoview"
+    },
     "license": "AGPL-3.0-only",
     "maintainer": {
         "name": "Jules Bertholet",

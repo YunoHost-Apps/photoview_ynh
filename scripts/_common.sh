@@ -5,115 +5,23 @@
 #=================================================
 
 # dependencies used by the app
-pkg_dependencies="curl gpg libdlib19 ffmpeg exiftool libheif1 ca-certificates golang libdlib-dev libblas-dev libatlas-base-dev liblapack-dev libjpeg-dev libheif-dev build-essential pkg-config autoconf automake libx265-dev libde265-dev libaom-dev"
+pkg_dependencies="libdlib19 ffmpeg exiftool libheif1"
 
 if ! (apt-cache -q=0 show darktable |& grep ': No packages found' &>/dev/null); then
 	pkg_dependencies="$pkg_dependencies darktable"
 fi
 
+PHOTOVIEW_VERSION=2.3.5
+
 #=================================================
 # PERSONAL HELPERS
 #=================================================
 
-function setup_sources {
-	ynh_secure_remove "$final_path"
-	ynh_setup_source --dest_dir="$final_path"
-	ynh_setup_source --source_id=libheif --dest_dir="$final_path/libheif"
-
-	set_permissions
-}
-
-function build_libheif {
-	pushd "$final_path/libheif" || ynh_die
-		chown -R $app:$app "$final_path/libheif"
-		mkdir -p "$final_path/local"
-		chown -R $app:$app "$final_path/libheif"
-		chown -R $app:$app "$final_path/local"
-		sudo -u $app "$final_path/libheif/autogen.sh"  2>&1
-		sudo -u $app "$final_path/libheif/configure" --prefix="$final_path/local" --disable-gdk-pixbuf  2>&1
-		make clean  2>&1
-		make  2>&1
-		make install 2>&1
-		make clean  2>&1
-	popd || ynh_die
-
-	set_permissions
-}
-
-function set_go_vars {
-	ynh_install_go --go_version=1.16
-	ynh_use_go
-
-	go_shims_path=$goenv_install_dir/shims
-	go_path_full="$go_shims_path":"$(sudo -u $app bash -c 'echo $PATH')"
-	heif_lib_path="$final_path/local/lib":"$(sudo -u $app bash -c 'echo $LIBRARY_PATH')"
-	heif_ld_lib_path="$final_path/local/lib":"$(sudo -u $app bash -c 'echo $LD_LIBRARY_PATH')"
-	heif_cgo_cflags="-I$final_path/local/include"
-}
-
-function build_api {
-	set_go_vars
-
-	pushd "$final_path/api" || ynh_die
-		chown -R $app:$app "$final_path"
-		set +e ; for i in {1..5}; do
-			sudo -u $app env "PATH=$go_path_full" "LIBRARY_PATH=$heif_lib_path" "LD_LIBRARY_PATH=$heif_ld_lib_path" "CGO_CFLAGS=$heif_cgo_cflags" GOENV_VERSION=$go_version CGO_ENABLED=1 go mod download  2>&1 && break
-			sleep 5
-		done; set -e
-		sudo -u $app env "PATH=$go_path_full" "LIBRARY_PATH=$heif_lib_path" "LD_LIBRARY_PATH=$heif_ld_lib_path" "CGO_CFLAGS=$heif_cgo_cflags" GOENV_VERSION=$go_version CGO_ENABLED=1 go install github.com/mattn/go-sqlite3 github.com/Kagami/go-face 2>&1
-		sudo -u $app env "PATH=$go_path_full" "LIBRARY_PATH=$heif_lib_path" "LD_LIBRARY_PATH=$heif_ld_lib_path" "CGO_CFLAGS=$heif_cgo_cflags" GOENV_VERSION=$go_version go build -o photoview "$final_path/api" 2>&1
-	popd || ynh_die
-
-	cp -T "$final_path/api/photoview" "$final_path/output/photoview"
-	cp -rT "$final_path/api/data" "$final_path/output/data"
-	set_permissions
-}
-
-function build_ui {
-	set_node_vars
-	
-	ui_path="$final_path/ui"
-
-	ynh_replace_string -m "npm" -r "yarn" -f "$ui_path/package.json"
-	ynh_replace_string -m "npx" -r "yarn run" -f "$ui_path/package.json"
-	ynh_replace_string -m "cd .. && " -r "" -f "$ui_path/package.json"
-
-	pushd "$ui_path" || ynh_die
-		chown -R $app:$app $final_path
-		sudo -u $app touch $ui_path/.yarnrc
-		sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" install 2>&1
-		sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" add graphql 2>&1
-		grep -q "build complete" <((sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" run build -- --public-url "$path_url" 2>&1 & echo $! >&3 ) 3>pid) ; kill "$(<pid)"
-	popd || ynh_die
-
-	cp -rT "$final_path/ui/dist" "$final_path/output/ui"
-
-	set_permissions
-}
-
-function set_node_vars {
-	ynh_exec_warn_less ynh_install_nodejs --nodejs_version=15
-	ynh_use_nodejs
-	node_path=$nodejs_path:$(sudo -u $app sh -c 'echo $PATH')
-}
-
-function set_permissions {
-	mkdir -p "$final_path/output/"{data,ui}
-	chown -R root:$app $final_path
-	chmod -R g=u,g-w,o-rwx "$final_path"
-
-	mkdir -p "$data_path/media_cache"
-	chown -R $app:$app "$data_path"
-
-	mkdir -p /var/log/$app
-	chmod -R o-rwx /var/log/$app
-}
-
 #=================================================
 # EXPERIMENTAL HELPERS
 #=================================================
-
-#!/bin/bash
+# YNH_INSTALL_GO
+#=================================================
 
 ynh_go_try_bash_extension() {
 	if [ -x src/configure ]; then

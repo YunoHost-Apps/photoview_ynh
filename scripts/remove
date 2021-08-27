@@ -66,8 +66,6 @@ ynh_mysql_remove_db --db_user=$db_user --db_name=$db_name
 ynh_script_progression --message="Removing dependencies..." --weight=5
 
 # Remove metapackage and its dependencies
-ynh_remove_go
-ynh_remove_nodejs
 ynh_remove_app_dependencies
 
 #=================================================
@@ -95,11 +93,6 @@ ynh_script_progression --message="Removing various files..."
 
 # Remove the log files
 ynh_secure_remove --file="/var/log/$app"
-
-#=================================================
-# REMOVE APP DATA DIR
-#=================================================
-ynh_script_progression --message="Removing app data directory..." --weight=1
 
 # Remove the app directory securely
 ynh_secure_remove --file="$data_path"

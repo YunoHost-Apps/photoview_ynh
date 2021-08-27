@@ -41,6 +41,7 @@ ynh_script_progression --message="Backing up the app before upgrading (may take 
 # Backup the current version of the app
 ynh_backup_before_upgrade
 ynh_clean_setup () {
+	ynh_clean_check_starting
 	# Restore it if the upgrade fails
 	ynh_restore_upgradebackup
 }
@@ -54,7 +55,7 @@ ynh_abort_if_errors
 #=================================================
 ynh_script_progression --message="Stopping a systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action="stop" --log_path="/var/log/$app/$app.log"
+ynh_systemd_action --service_name=$app --action="stop" --log_path="systemd" --line_match="Stopped Photoview"
 
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
@@ -67,6 +68,25 @@ if ynh_legacy_permissions_exists; then
 
 	ynh_app_setting_delete --app=$app --key=is_public
 fi
+
+# If .env doesn't exist at right destination, move it
+if [ -f "$final_path/.env" ]; then
+	tmpdir="$(mktemp -d)"
+	
+	ynh_delete_file_checksum --file="$final_path/output/.env"
+	cp -af "$final_path/output/.env" "$tmpdir/.env"
+	
+	ynh_secure_remove --file="$final_path"
+	mkdir -p "$final_path"
+	
+	cp -af "$tmpdir/.env" "$final_path/.env"
+	ynh_store_file_checksum --file="$final_path/.env"
+	chmod 400 "$final_path/.env"
+	chown $app:$app "$final_path/.env"
+fi
+
+ynh_remove_go
+ynh_remove_nodejs
 
 #=================================================
 # CREATE DEDICATED USER
@@ -84,8 +104,12 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
-	setup_sources
+	ynh_setup_source --dest_dir="$final_path/build-photoview/" --source_id="docker-image-extract"
 fi
+
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:$app "$final_path"
 
 #=================================================
 # NGINX CONFIGURATION
@@ -105,38 +129,36 @@ ynh_install_app_dependencies $pkg_dependencies
 #=================================================
 # SPECIFIC UPGRADE
 #=================================================
+# MAKE INSTALL
+#=================================================
+ynh_script_progression --message="Making install..."
 
-if [ "$upgrade_type" == "UPGRADE_APP" ]; then
-	#=================================================
-	# BUILD LIBHEIF
-	#=================================================
-	ynh_script_progression --message="Compiling libheif..." --weight=70
+if [ "$upgrade_type" == "UPGRADE_APP" ]
+then
 
-	build_libheif
-
-	#=================================================
-	# BUILD API
-	#=================================================
-	ynh_script_progression --message="Compiling Go API..." --weight=165
-
-	build_api
-
-	#=================================================
-	# BUILD UI
-	#=================================================
-	ynh_script_progression --message="Building static UI files..." --weight=45
-
-	build_ui
+	# Install photoview
+	pushd $final_path/build-photoview
+		./docker-image-extract viktorstrate/photoview:$PHOTOVIEW_VERSION
+	popd
+	mkdir -p "$final_path/live/ui/"
+	rsync -a "$final_path/build-photoview/output/app/" "$final_path/live/"
+	rsync -a "$final_path/build-photoview/output/ui/" "$final_path/live/ui/"
+	ynh_secure_remove --file="$final_path/build-photoview"
 fi
+
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:$app "$final_path"
 
 #=================================================
 # UPDATE A CONFIG FILE
 #=================================================
 ynh_script_progression --message="Updating a configuration file..."
 
-ynh_add_config --template=".env" --destination="$final_path/output/.env"
+ynh_add_config --template=".env" --destination="$final_path/.env"
 
-set_permissions
+chmod 400 "$final_path/.env"
+chown $app:$app "$final_path/.env"
 
 #=================================================
 # SETUP SYSTEMD
@@ -168,7 +190,7 @@ yunohost service add $app --description="Photoview photo manager API" --log="/va
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
+ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log" --line_match="Photoview UI public endpoint ready"
 
 #=================================================
 # RELOAD NGINX

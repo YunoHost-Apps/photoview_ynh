@@ -13,6 +13,8 @@
 		upgrade=1
 		# Version 2.3.2
 		upgrade=1	from_commit=069fc840e413e1d2cf80616498bcc052e05616a1
+		# 2.3.4~ynh1
+		upgrade=1	from_commit=a146c99ea9ce9dae4d9d07dac6f5229956204317
 		backup_restore=1
 		multi_instance=1
 		port_already_use=0
@@ -23,4 +25,5 @@ Notification=none
 ;;; Upgrade options
 	; commit=069fc840e413e1d2cf80616498bcc052e05616a1
 		name="Version 2.3.2"
-		manifest_arg=domain=domain.tld&is_public=1&mapbox_token=
+	; commit=a146c99ea9ce9dae4d9d07dac6f5229956204317
+		name="2.3.4~ynh1"

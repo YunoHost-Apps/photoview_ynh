@@ -70,7 +70,7 @@ if ynh_legacy_permissions_exists; then
 fi
 
 # If .env doesn't exist at right destination, move it
-if [ -f "$final_path/.env" ]; then
+if [ ! -f "$final_path/.env" ]; then
 	tmpdir="$(mktemp -d)"
 	
 	ynh_delete_file_checksum --file="$final_path/output/.env"

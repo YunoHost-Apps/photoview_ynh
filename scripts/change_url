@@ -101,7 +101,7 @@ fi
 #=================================================
 ynh_script_progression --message="Updating a configuration file..."
 
-ynh_add_config --template=".env" --destination="$final_path/output/.env"
+ynh_add_config --template=".env" --destination="$final_path/.env"
 
 set_permissions
 

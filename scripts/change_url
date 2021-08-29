@@ -103,7 +103,8 @@ ynh_script_progression --message="Updating a configuration file..."
 
 ynh_add_config --template=".env" --destination="$final_path/.env"
 
-set_permissions
+chmod 400 "$final_path/.env"
+chown $app:$app "$final_path/.env"
 
 #=================================================
 # GENERIC FINALISATION

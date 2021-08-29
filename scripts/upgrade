@@ -83,10 +83,10 @@ if [ ! -f "$final_path/.env" ]; then
 	ynh_store_file_checksum --file="$final_path/.env"
 	chmod 400 "$final_path/.env"
 	chown $app:$app "$final_path/.env"
-fi
 
-ynh_remove_go
-ynh_remove_nodejs
+	ynh_remove_go
+	ynh_remove_nodejs
+fi
 
 #=================================================
 # CREATE DEDICATED USER

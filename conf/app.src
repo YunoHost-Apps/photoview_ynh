@@ -1,7 +1,7 @@
-SOURCE_URL=https://github.com/photoview/photoview/archive/refs/tags/v2.3.5.tar.gz
-SOURCE_SUM=d6fc5f1496eb698325af2844ee201db1ab55cecdbe2b4e9928e9299598ed47a8
+SOURCE_URL=https://github.com/photoview/photoview/archive/refs/tags/v2.3.6.tar.gz
+SOURCE_SUM=cef1d36baf7bd747179cc9844f5e00bef62fe3de4eca1c30669000d3e439d8cb
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=tar.gz
 SOURCE_IN_SUBDIR=true
-SOURCE_FILENAME=v2.3.4.tar.gz
+SOURCE_FILENAME=v2.3.6.tar.gz
 SOURCE_EXTRACT=true

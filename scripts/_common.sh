@@ -92,7 +92,7 @@ function build_ui {
 }
 
 function set_node_vars {
-	ynh_exec_warn_less ynh_install_nodejs --nodejs_version=15
+	ynh_exec_warn_less ynh_install_nodejs --nodejs_version=16
 	ynh_use_nodejs
 	node_path=$nodejs_path:$(sudo -u $app sh -c 'echo $PATH')
 }

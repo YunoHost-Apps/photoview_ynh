@@ -39,7 +39,7 @@ ynh_script_progression --message="Backing up the app before upgrading (may take 
 
 # Backup the current version of the app
 ynh_backup_before_upgrade
-ynh_clean_setup () {
+ynh_clean_setup() {
 	# Restore it if the upgrade fails
 	ynh_restore_upgradebackup
 }
@@ -68,14 +68,13 @@ ynh_system_user_create --username=$app --home_dir="$final_path"
 #=================================================
 ynh_script_progression --message="Upgrading dependencies..." --weight=1
 
-ynh_install_app_dependencies $pkg_dependencies
+install_dependencies
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 
-if [ "$upgrade_type" == "UPGRADE_APP" ]
-then
+if [ "$upgrade_type" == "UPGRADE_APP" ]; then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
 	setup_sources
@@ -122,7 +121,7 @@ fi
 ynh_script_progression --message="Upgrading systemd configuration..." --weight=1
 
 # Create a dedicated systemd config
-ynh_add_systemd_config --service=$app 
+ynh_add_systemd_config --service=$app
 
 #=================================================
 # UPDATE A CONFIG FILE

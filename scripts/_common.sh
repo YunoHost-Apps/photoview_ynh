@@ -15,6 +15,11 @@ fi
 # PERSONAL HELPERS
 #=================================================
 
+function install_dependencies {
+	ynh_install_app_dependencies $pkg_dependencies
+	ynh_install_extra_app_dependencies --repo="deb https://dl.yarnpkg.com/debian/ stable main" --package="yarn" --key="https://dl.yarnpkg.com/debian/pubkey.gpg"
+}
+
 function setup_sources {
 	ynh_secure_remove "$final_path"
 	ynh_setup_source --dest_dir="$final_path"
@@ -81,13 +86,13 @@ function build_ui {
 	ynh_replace_string -m "cd .. && " -r "" -f "$ui_path/package.json"
 
 	pushd "$ui_path" || ynh_die
-		chown -R $app:$app $final_path
-		sudo -u $app touch $ui_path/.yarnrc
-		sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" import 2>&1
-		sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" add husky 2>&1
-		sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" install 2>&1
-		sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" add graphql --ignore-engines 2>&1
-		sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" run build --public-url "$path_url" 2>&1
+	chown -R $app:$app $final_path
+	sudo -u $app touch $ui_path/.yarnrc
+	sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" import 2>&1
+	sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" add husky 2>&1
+	sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" install 2>&1
+	sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" add graphql --ignore-engines 2>&1
+	sudo -u $app env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" run build --public-url "$path_url" 2>&1
 	popd || ynh_die
 
 	cp -rT "$final_path/ui/build" "$final_path/output/ui"
@@ -97,7 +102,7 @@ function build_ui {
 
 function set_node_vars {
 	nodejs_version=$(ynh_app_setting_get --app=$app --key=nodejs_version)
-	if [ $nodejs_version -ne 16 ]; then 
+	if [ $nodejs_version -ne 16 ]; then
 		ynh_exec_warn_less ynh_remove_nodejs
 	fi
 	ynh_exec_warn_less ynh_install_nodejs --nodejs_version=16

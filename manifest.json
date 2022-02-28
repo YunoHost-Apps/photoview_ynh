@@ -6,7 +6,7 @@
         "en": "Simple and user-friendly photo gallery that's made for photographers ",
         "fr": "Galerie photos simple et facile à utiliser, faite pour les photographes"
     },
-    "version": "2.3.9~ynh2",
+    "version": "2.3.12~ynh1",
     "url": "https://photoview.github.io/",
     "upstream": {
         "license": "AGPL-3.0-or-later",
@@ -27,7 +27,7 @@
         "mysql"
     ],
     "arguments": {
-        "install" : [
+        "install": [
             {
                 "name": "domain",
                 "type": "domain",

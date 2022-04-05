@@ -49,6 +49,9 @@ function set_go_vars {
 	ynh_install_go --go_version=1.16
 	ynh_use_go
 
+	export GOPATH="$final_path/build/go"
+	export GOCACHE="$final_path/build/.cache"
+
 	go_shims_path=$goenv_install_dir/shims
 	go_path_full="$go_shims_path":"$(sudo -u $app bash -c 'echo $PATH')"
 	heif_lib_path="$final_path/local/lib":"$(sudo -u $app bash -c 'echo $LIBRARY_PATH')"

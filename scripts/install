@@ -69,8 +69,6 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 ynh_script_progression --message="Installing dependencies..." --weight=60
 
 install_dependencies
-set_go_vars
-set_node_vars
 
 #=================================================
 # CREATE DEDICATED USER
@@ -99,6 +97,9 @@ ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 ynh_app_setting_set --app=$app --key=data_path --value=$data_path
 # Download, check integrity, uncompress and patch the source from app.src
 setup_sources
+
+set_go_vars
+set_node_vars
 
 #=================================================
 # NGINX CONFIGURATION

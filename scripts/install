@@ -98,9 +98,6 @@ ynh_app_setting_set --app=$app --key=data_path --value=$data_path
 # Download, check integrity, uncompress and patch the source from app.src
 setup_sources
 
-set_go_vars
-set_node_vars
-
 #=================================================
 # NGINX CONFIGURATION
 #=================================================

@@ -55,7 +55,7 @@ ynh_app_setting_set --app=$app --key=mapbox_token --value=$mapbox_token
 #=================================================
 # STANDARD MODIFICATIONS
 #=================================================
-# FIND AND OPEN A PORT
+# FIND A PORT
 #=================================================
 ynh_script_progression --message="Finding an available port..." --weight=1
 

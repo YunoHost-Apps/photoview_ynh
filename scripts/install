@@ -13,8 +13,8 @@ source /usr/share/yunohost/helpers
 # MANAGE SCRIPT FAILURE
 #=================================================
 
-ynh_clean_setup() {
-	true
+ynh_clean_setup () {
+	ynh_clean_check_starting
 }
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
@@ -39,7 +39,6 @@ final_path=/opt/yunohost/$app
 test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
 
 data_path=/home/yunohost.app/$app
-test ! -e "$data_path" || ynh_die --message="This path already contains a folder"
 
 # Register (book) web path
 ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
@@ -56,7 +55,7 @@ ynh_app_setting_set --app=$app --key=mapbox_token --value=$mapbox_token
 #=================================================
 # STANDARD MODIFICATIONS
 #=================================================
-# FIND PORTS
+# FIND A PORT
 #=================================================
 ynh_script_progression --message="Finding an available port..." --weight=1
 
@@ -136,11 +135,12 @@ build_ui
 ynh_script_progression --message="Configuring a systemd service..." --weight=1
 
 # Create a dedicated systemd config
-ynh_add_systemd_config --service=$app
+ynh_add_systemd_config
 
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
+ynh_script_progression --message="Adding a configuration file..."
 
 ynh_add_config --template=".env" --destination="$final_path/output/.env"
 
@@ -177,7 +177,8 @@ ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$ap
 ynh_script_progression --message="Configuring permissions..." --weight=1
 
 # Make app public if necessary
-if [ $is_public -eq 1 ]; then
+if [ $is_public -eq 1 ]
+then
 	# Everyone can access the app.
 	# The "main" permission is automatically created before the install script.
 	ynh_permission_update --permission="main" --add="visitors"

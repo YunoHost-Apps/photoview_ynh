@@ -15,7 +15,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 ynh_clean_setup() {
-	true
+	ynh_clean_check_starting
 }
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
@@ -42,35 +42,25 @@ mapbox_token=$(ynh_app_setting_get --app=$app --key=mapbox_token)
 #=================================================
 ynh_script_progression --message="Validating restoration parameters..." --weight=1
 
-ynh_webpath_available --domain=$domain --path_url=$path_url ||
-	ynh_die --message="Path not available: ${domain}${path_url}"
-test ! -d $final_path ||
-	ynh_die --message="There is already a directory: $final_path "
+test ! -d $final_path \
+	|| ynh_die --message="There is already a directory: $final_path "
 
 #=================================================
 # STANDARD RESTORATION STEPS
 #=================================================
 # RESTORE THE NGINX CONFIGURATION
 #=================================================
+ynh_script_progression --message="Restoring the NGINX web server configuration..."
 
 ynh_restore_file --origin_path="/etc/nginx/conf.d/$domain.d/$app.conf"
 
 #=================================================
 # RECREATE THE DEDICATED USER
 #=================================================
-
 ynh_script_progression --message="Recreating the dedicated system user..." --weight=1
 
 # Create the dedicated user (if not existing)
 ynh_system_user_create --username=$app --home_dir="$final_path"
-
-#=================================================
-# REINSTALL DEPENDENCIES
-#=================================================
-ynh_script_progression --message="Reinstalling dependencies..." --weight=30
-
-# Define and install dependencies
-install_dependencies
 
 #=================================================
 # RESTORE THE APP MAIN DIR
@@ -84,7 +74,6 @@ set_permissions
 #=================================================
 # RESTORE THE APP DATA DIR
 #=================================================
-
 ynh_script_progression --message="Restoring the app data directory..." --weight=1
 
 ynh_restore_file --origin_path="$data_path" --not_mandatory
@@ -94,27 +83,23 @@ set_permissions
 #=================================================
 # SPECIFIC RESTORATION
 #=================================================
+# REINSTALL DEPENDENCIES
+#=================================================
+ynh_script_progression --message="Reinstalling dependencies..." --weight=30
+
+# Define and install dependencies
+install_dependencies
+set_go_vars
+set_node_vars
+
+#=================================================
 # RESTORE THE MYSQL DATABASE
 #=================================================
 ynh_script_progression --message="Restoring the MySQL database..." --weight=1
 
 db_pwd=$(ynh_app_setting_get --app=$app --key=mysqlpwd)
 ynh_mysql_setup_db --db_user=$db_user --db_name=$db_name --db_pwd=$db_pwd
-ynh_mysql_connect_as --user=$db_user --password=$db_pwd --database=$db_name <./db.sql
-
-#=================================================
-# RESTORE GO
-#=================================================
-ynh_script_progression --message="Restoring Go..." --weight=1
-
-set_go_vars
-
-#=================================================
-# RESTORE NODE.JS
-#=================================================
-ynh_script_progression --message="Restoring Node.js..." --weight=1
-
-set_node_vars
+ynh_mysql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < ./db.sql
 
 #=================================================
 # RESTORE SYSTEMD
@@ -123,6 +108,15 @@ ynh_script_progression --message="Restoring the systemd configuration..." --weig
 
 ynh_restore_file --origin_path="/etc/systemd/system/$app.service"
 systemctl enable $app.service --quiet
+
+#=================================================
+# RESTORE THE LOGROTATE CONFIGURATION
+#=================================================
+ynh_script_progression --message="Restoring the logrotate configuration..."
+
+ynh_restore_file --origin_path="/etc/logrotate.d/$app"
+
+set_permissions
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
@@ -137,20 +131,6 @@ yunohost service add $app --description="Photoview photo manager API" --log="/va
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
 ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
-
-#=================================================
-# RESTORE VARIOUS FILES
-#=================================================
-
-ynh_restore_file --origin_path="/var/log/$app"
-
-#=================================================
-# RESTORE THE LOGROTATE CONFIGURATION
-#=================================================
-
-ynh_restore_file --origin_path="/etc/logrotate.d/$app"
-
-set_permissions
 
 #=================================================
 # GENERIC FINALIZATION

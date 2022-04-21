@@ -11,15 +11,21 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 
 ## Vue d'ensemble
 
-Galerie photos simple et facile à utiliser, faite pour les photographes
+Galerie photos simple et facile à utiliser, faite pour les photographes.
+
 
 **Version incluse :** 2.3.12~ynh1
 
+**Démo :** https://photos.qpqp.dk/
 
+## Captures d'écran
+
+![](./doc/screenshots/screenshot1.png)
 
 ## Documentations et ressources
 
 * Site officiel de l'app : https://photoview.github.io/
+* Documentation officielle de l'admin : https://photoview.github.io/docs/
 * Dépôt de code officiel de l'app : https://github.com/photoview/photoview
 * Documentation YunoHost pour cette app : https://yunohost.org/app_photoview
 * Signaler un bug : https://github.com/YunoHost-Apps/photoview_ynh/issues

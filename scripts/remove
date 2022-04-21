@@ -43,7 +43,15 @@ ynh_script_progression --message="Stopping and removing the systemd service..." 
 
 # Remove the dedicated systemd config
 ynh_remove_systemd_config
-I
+
+#=================================================
+# REMOVE LOGROTATE CONFIGURATION
+#=================================================
+ynh_script_progression --message="Removing logrotate configuration..." --weight=1
+
+# Remove the app-specific logrotate config
+ynh_remove_logrotate
+
 #=================================================
 # REMOVE THE MYSQL DATABASE
 #=================================================
@@ -51,14 +59,6 @@ ynh_script_progression --message="Removing the MySQL database..." --weight=1
 
 # Remove a database if it exists, along with the associated user
 ynh_mysql_remove_db --db_user=$db_user --db_name=$db_name
-
-#=================================================
-# REMOVE DEPENDENCIES
-#=================================================
-ynh_script_progression --message="Removing dependencies..." --weight=5
-
-# Remove metapackage and its dependencies
-ynh_remove_app_dependencies
 
 #=================================================
 # REMOVE APP MAIN DIR
@@ -85,12 +85,14 @@ ynh_script_progression --message="Removing NGINX web server configuration..." --
 ynh_remove_nginx_config
 
 #=================================================
-# REMOVE LOGROTATE CONFIGURATION
+# REMOVE DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Removing logrotate configuration..." --weight=1
+ynh_script_progression --message="Removing dependencies..." --weight=5
 
-# Remove the app-specific logrotate config
-ynh_remove_logrotate
+# Remove metapackage and its dependencies
+ynh_remove_go
+ynh_remove_nodejs
+ynh_remove_app_dependencies
 
 #=================================================
 # SPECIFIC REMOVE
@@ -100,20 +102,6 @@ ynh_remove_logrotate
 
 # Remove the log files
 ynh_secure_remove --file="/var/log/$app"
-
-#=================================================
-# REMOVE GO
-#=================================================
-ynh_script_progression --message="Removing Go..." --weight=1
-
-ynh_remove_go
-
-#=================================================
-# REMOVE NODE
-#=================================================
-ynh_script_progression --message="Removing Node.js..." --weight=1
-
-ynh_remove_nodejs
 
 #=================================================
 # GENERIC FINALIZATION

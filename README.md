@@ -31,7 +31,7 @@ Photoview is a simple and user-friendly photo gallery that's made for photograph
 * Official app website: https://photoview.github.io/
 * Official admin documentation: https://photoview.github.io/docs/
 * Upstream app code repository: https://github.com/photoview/photoview
-* YunoHost documentation for this app: https://yunohost.org/app_photoview
+* YunoHost documentation for this app: https://yunohost.org/app_photoview (to be created)
 * Report a bug: https://github.com/YunoHost-Apps/photoview_ynh/issues
 
 ## Developer info

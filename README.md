@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # Photoview for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/photoview.svg)](https://dash.yunohost.org/appci/app/photoview) ![](https://ci-apps.yunohost.org/ci/badges/photoview.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/photoview.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/photoview.svg)](https://dash.yunohost.org/appci/app/photoview) ![Working status](https://ci-apps.yunohost.org/ci/badges/photoview.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/photoview.maintain.svg)
+
 [![Install Photoview with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=photoview)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -24,25 +25,26 @@ Photoview is a simple and user-friendly photo gallery that's made for photograph
 
 ## Screenshots
 
-![](./doc/screenshots/screenshot1.png)
+![Screenshot of Photoview](./doc/screenshots/screenshot1.png)
 
 ## Documentation and resources
 
-* Official app website: https://photoview.github.io/
-* Official admin documentation: https://photoview.github.io/docs/
-* Upstream app code repository: https://github.com/photoview/photoview
-* YunoHost documentation for this app: https://yunohost.org/app_photoview
-* Report a bug: https://github.com/YunoHost-Apps/photoview_ynh/issues
+* Official app website: <https://photoview.github.io/>
+* Official admin documentation: <https://photoview.github.io/docs/>
+* Upstream app code repository: <https://github.com/photoview/photoview>
+* YunoHost documentation for this app: <https://yunohost.org/app_photoview>
+* Report a bug: <https://github.com/YunoHost-Apps/photoview_ynh/issues>
 
 ## Developer info
 
 Please send your pull request to the [testing branch](https://github.com/YunoHost-Apps/photoview_ynh/tree/testing).
 
 To try the testing branch, please proceed like that.
-```
+
+``` bash
 sudo yunohost app install https://github.com/YunoHost-Apps/photoview_ynh/tree/testing --debug
 or
 sudo yunohost app upgrade photoview -u https://github.com/YunoHost-Apps/photoview_ynh/tree/testing --debug
 ```
 
-**More info regarding app packaging:** https://yunohost.org/packaging_apps
+**More info regarding app packaging:** <https://yunohost.org/packaging_apps>

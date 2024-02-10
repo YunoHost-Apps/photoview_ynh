@@ -32,7 +32,7 @@ Galerie photos simple et facile à utiliser, faite pour les photographes.
 * Site officiel de l’app : <https://photoview.github.io/>
 * Documentation officielle de l’admin : <https://photoview.github.io/docs/>
 * Dépôt de code officiel de l’app : <https://github.com/photoview/photoview>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_photoview>
+* YunoHost Store: <https://apps.yunohost.org/app/photoview>
 * Signaler un bug : <https://github.com/YunoHost-Apps/photoview_ynh/issues>
 
 ## Informations pour les développeurs

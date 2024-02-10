@@ -111,7 +111,7 @@ function set_node_vars {
 	if [ $nodejs_version -ne 16 ]; then
 		ynh_exec_warn_less ynh_remove_nodejs
 	fi
-	ynh_exec_warn_less ynh_install_nodejs --nodejs_version=16
+	ynh_exec_warn_less ynh_install_nodejs --nodejs_version=18
 	ynh_use_nodejs
 	node_path=$nodejs_path:$(sudo -u $app sh -c 'echo $PATH')
 }

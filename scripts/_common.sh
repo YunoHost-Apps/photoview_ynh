@@ -29,6 +29,9 @@ function setup_sources {
 }
 
 function build_libheif {
+	export GOPATH="$final_path/build/go"
+	export GOCACHE="$final_path/build/.cache"
+
 	pushd "$final_path/libheif" || ynh_die
 	chown -R $app:$app "$final_path/libheif"
 	mkdir -p "$final_path/local"
@@ -48,6 +51,9 @@ function build_libheif {
 function set_go_vars {
 	ynh_install_go --go_version=1.16
 	ynh_use_go
+
+	export GOPATH="$final_path/build/go"
+	export GOCACHE="$final_path/build/.cache"
 
 	go_shims_path=$goenv_install_dir/shims
 	go_path_full="$go_shims_path":"$(sudo -u $app bash -c 'echo $PATH')"

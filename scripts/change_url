@@ -26,6 +26,7 @@ ynh_change_url_nginx_config
 #=================================================
 
 ynh_add_config --template=".env" --destination="$install_dir/output/.env"
+chown "$app:$app" "$install_dir/output/.env"
 
 #=================================================
 # START SYSTEMD SERVICE

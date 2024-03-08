@@ -47,8 +47,10 @@ ynh_script_progression --message="Upgrading source files..." --weight=5
 
 ynh_setup_source --dest_dir="$install_dir/sources" --full_replace=1
 ynh_setup_source --source_id=libheif --dest_dir="$install_dir/libheif" --full_replace=1
+mkdir -p "$install_dir/output/"{data,ui}
 
 chown -R "$app:$app" "$install_dir"
+chown -R "$app:$app" "$data_dir"
 
 #=================================================
 # BUILD APP
@@ -68,13 +70,7 @@ build_ui
 ynh_script_progression --message="Updating a configuration file..."
 
 ynh_add_config --template=".env" --destination="$install_dir/output/.env"
-
-#=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
-
-# Set permissions on app files
-set_permissions
+chown "$app:$app" "$install_dir/output/.env"
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS

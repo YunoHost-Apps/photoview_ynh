@@ -29,7 +29,10 @@ ynh_script_progression --message="Setting up source files..." --weight=10
 ynh_setup_source --dest_dir="$install_dir/sources"
 ynh_setup_source --source_id=libheif --dest_dir="$install_dir/libheif"
 
+mkdir -p "$install_dir/output/"{data,ui}
+
 chown -R "$app:$app" "$install_dir"
+chown -R "$app:$app" "$data_dir"
 
 #=================================================
 # BUILD APP
@@ -42,8 +45,6 @@ build_api
 
 ynh_script_progression --message="Building static UI files..." --weight=10
 build_ui
-
-set_permissions
 
 #=================================================
 # ADD A CONFIGURATION

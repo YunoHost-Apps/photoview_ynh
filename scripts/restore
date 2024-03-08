@@ -47,7 +47,6 @@ ynh_mysql_connect_as --user="$db_user" --password="$db_pwd" --database="$db_name
 # SPECIFIC RESTORATION
 
 set_go_vars
-set_node_vars
 
 #=================================================
 # RESTORE VARIOUS FILES

@@ -24,11 +24,6 @@ function set_go_vars {
     heif_cgo_cflags="-I$install_dir/local/include"
 }
 
-function set_node_vars {
-    ynh_use_nodejs
-    node_path=$nodejs_path:$(sudo -u $app sh -c 'echo $PATH')
-}
-
 function build_libheif {
     export GOPATH="$install_dir/build/go"
     export GOCACHE="$install_dir/build/.cache"
@@ -73,25 +68,23 @@ function build_api {
 }
 
 function build_ui {
-    set_node_vars
+    ynh_use_nodejs
+    node_path=$nodejs_path:$(sudo -u $app sh -c 'echo $PATH')
 
-    ui_path="$install_dir/sources/ui"
-
-    ynh_replace_string -m "npm" -r "yarn" -f "$ui_path/package.json"
-    ynh_replace_string -m "npx" -r "yarn run" -f "$ui_path/package.json"
-    ynh_replace_string -m "cd .. && " -r "" -f "$ui_path/package.json"
-
-    pushd "$ui_path" || ynh_die
+    pushd "$install_dir/sources/ui" || ynh_die
+        ynh_replace_string -m "npm" -r "yarn" -f "package.json"
+        ynh_replace_string -m "npx" -r "yarn run" -f "package.json"
+        ynh_replace_string -m "cd .. && " -r "" -f "package.json"
         # chown -R "$app:$app" $install_dir
-        ynh_exec_as "$app" touch "$ui_path/.yarnrc"
-        ynh_exec_as "$app" env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" import 2>&1
-        ynh_exec_as "$app" env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" add husky 2>&1
-        ynh_exec_as "$app" env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" install 2>&1
-        ynh_exec_as "$app" env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" add graphql --ignore-engines 2>&1
-        ynh_exec_as "$app" env "PATH=$node_path" yarn --cache-folder "$ui_path/yarn-cache" --use-yarnrc "$ui_path/.yarnrc" run build --public-url "$path" 2>&1
+        ynh_exec_as "$app" touch ".yarnrc"
+        ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" import 2>&1
+        ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" add husky 2>&1
+        ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" install 2>&1
+        ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" add graphql --ignore-engines 2>&1
+        ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" run build --public-url "$path" 2>&1
     popd || ynh_die
 
-    cp -rT "$ui_path/build" "$install_dir/output/ui"
+    cp -rT "$install_dir/sources/ui/build" "$install_dir/output/ui"
 }
 
 #=================================================

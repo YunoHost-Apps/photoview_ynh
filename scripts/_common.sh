@@ -79,6 +79,7 @@ function build_ui {
         # ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" install 2>&1
         # ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" add graphql --ignore-engines 2>&1
         # ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" run build --public-url "$path" 2>&1
+        ynh_exec_as "$app" env "$ynh_node_load_PATH" "$ynh_npm" install
         ynh_exec_as "$app" env "$ynh_node_load_PATH" "$ynh_npm" run build
     popd || ynh_die
 

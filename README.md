@@ -18,7 +18,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 Photoview is a simple and user-friendly photo gallery that's made for photographers and aims to provide an easy and fast way to navigate directories, with thousands of high resolution photos.
 
-**Shipped version:** 2.3.12~ynh1
+**Shipped version:** 2.3.12~ynh2
 
 **Demo:** <https://photos.qpqp.dk/>
 

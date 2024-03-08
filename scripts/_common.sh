@@ -29,18 +29,6 @@ function set_node_vars {
     node_path=$nodejs_path:$(sudo -u $app sh -c 'echo $PATH')
 }
 
-function set_permissions {
-    mkdir -p "$install_dir/output/"{data,ui}
-    chown -R "root:$app" "$install_dir"
-    chmod -R g=u,g-w,o-rwx "$install_dir"
-
-    mkdir -p "$data_dir/media_cache"
-    chown -R "$app:$app" "$data_dir"
-
-    mkdir -p "/var/log/$app"
-    chmod -R o-rwx "/var/log/$app"
-}
-
 function build_libheif {
     export GOPATH="$install_dir/build/go"
     export GOCACHE="$install_dir/build/.cache"
@@ -82,7 +70,6 @@ function build_api {
 
     cp -T "$install_dir/sources/api/photoview" "$install_dir/output/photoview"
     cp -rT "$install_dir/sources/api/data" "$install_dir/output/data"
-    set_permissions
 }
 
 function build_ui {

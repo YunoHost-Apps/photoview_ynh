@@ -65,6 +65,7 @@ ram.runtime = "50M" # FIXME: replace with an **estimate** minimum ram requiremen
     [resources.install_dir]
 
     [resources.data_dir]
+    subdirs = ["media_cache"]
 
     [resources.permissions]
     main.url = "/"

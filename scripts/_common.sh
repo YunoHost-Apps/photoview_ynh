@@ -264,7 +264,7 @@ ynh_install_go() {
     # Install the requested version of Go
     local final_go_version=$(goenv latest --print $go_version)
     ynh_print_info --message="Installation of Go-$final_go_version"
-    goenv install --skip-existing $final_go_version
+    goenv install --skip-existing --quiet $final_go_version
 
     # Store go_version into the config of this app
     ynh_app_setting_set --app=$YNH_APP_INSTANCE_NAME --key=go_version --value=$final_go_version

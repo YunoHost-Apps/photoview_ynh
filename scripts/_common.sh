@@ -4,8 +4,8 @@
 # COMMON VARIABLES
 #=================================================
 
-go_version=1.16
-node_version=16
+go_version=1.18
+node_version=18
 
 #=================================================
 # PERSONAL HELPERS

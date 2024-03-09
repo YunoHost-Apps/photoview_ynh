@@ -86,6 +86,13 @@ function build_ui {
     cp -rT "$install_dir/sources/ui/build" "$install_dir/output/ui"
 }
 
+function cleanup_sources {
+    ynh_secure_remove --file="$install_dir/libheif"
+    ynh_secure_remove --file="$install_dir/sources"
+    ynh_secure_remove --file="$install_dir/go"
+    ynh_secure_remove --file="$install_dir/.cache/go-build"
+}
+
 #=================================================
 # EXPERIMENTAL HELPERS
 #=================================================

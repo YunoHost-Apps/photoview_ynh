@@ -64,6 +64,8 @@ build_api
 ynh_script_progression --message="Building static UI files..." --weight=45
 build_ui
 
+cleanup_sources
+
 #=================================================
 # UPDATE A CONFIG FILE
 #=================================================

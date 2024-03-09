@@ -46,6 +46,8 @@ build_api
 ynh_script_progression --message="Building static UI files..." --weight=10
 build_ui
 
+cleanup_sources
+
 #=================================================
 # ADD A CONFIGURATION
 #=================================================

@@ -1,8 +1,6 @@
 #!/bin/bash
 
 #=================================================
-# GENERIC START
-#=================================================
 # IMPORT GENERIC HELPERS
 #=================================================
 
@@ -10,179 +8,93 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# LOAD SETTINGS
-#=================================================
-ynh_script_progression --message="Loading installation settings..." --weight=1
-
-app=$YNH_APP_INSTANCE_NAME
-
-domain=$(ynh_app_setting_get --app=$app --key=domain)
-path_url=$(ynh_app_setting_get --app=$app --key=path)
-final_path=$(ynh_app_setting_get --app=$app --key=final_path)
-db_name=$(ynh_app_setting_get --app=$app --key=db_name)
-db_user=$db_name
-db_pwd=$(ynh_app_setting_get --app=$app --key=mysqlpwd)
-data_path=$(ynh_app_setting_get --app=$app --key=data_path)
-port=$(ynh_app_setting_get --app=$app --key=port)
-mapbox_token=$(ynh_app_setting_get --app=$app --key=mapbox_token)
-
-#=================================================
-# CHECK VERSION
-#=================================================
-ynh_script_progression --message="Checking version..."
-
-upgrade_type=$(ynh_check_app_version_changed)
-
-#=================================================
-# BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
-#=================================================
-ynh_script_progression --message="Backing up the app before upgrading (may take a while)..." --weight=30
-
-# Backup the current version of the app
-ynh_backup_before_upgrade
-ynh_clean_setup () {
-	ynh_clean_check_starting
-	# Restore it if the upgrade fails
-	ynh_restore_upgradebackup
-}
-# Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
-
-#=================================================
-# STANDARD UPGRADE STEPS
-#=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Stopping a systemd service..." --weight=1
+ynh_script_progression --message="Stopping $app's systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action="stop" --log_path="/var/log/$app/$app.log"
+ynh_systemd_action --service_name="$app" --action="stop" --log_path="/var/log/$app/$app.log"
 
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
 ynh_script_progression --message="Ensuring downward compatibility..."
 
-# Cleaning legacy permissions
-if ynh_legacy_permissions_exists; then
-	ynh_legacy_permissions_delete_all
-
-	ynh_app_setting_delete --app=$app --key=is_public
+if [ ! -d "$install_dir/sources" ]; then
+    # Final cleanup...
+    ynh_secure_remove --file="$install_dir"
+    mkdir -p "$install_dir"
+    chmod 750 "$install_dir"
 fi
 
 #=================================================
-# CREATE DEDICATED USER
+# INSTALL GO
 #=================================================
-ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
+ynh_script_progression --message="Upgrading Go..." --weight=10
 
-# Create a dedicated user (if not existing)
-ynh_system_user_create --username=$app --home_dir="$final_path"
+ynh_install_go --go_version="$go_version"
+
+#=================================================
+# INSTALL NODEJS
+#=================================================
+ynh_script_progression --message="Upgrading NodeJS..." --weight=10
+
+ynh_install_nodejs --nodejs_version="$node_version"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
+ynh_script_progression --message="Upgrading source files..." --weight=5
 
-if [ "$upgrade_type" == "UPGRADE_APP" ]; then
-	ynh_script_progression --message="Upgrading source files..." --weight=5
+ynh_setup_source --dest_dir="$install_dir/sources" --full_replace=1
+ynh_setup_source --source_id=libheif --dest_dir="$install_dir/libheif" --full_replace=1
+mkdir -p "$install_dir/output/"{data,ui}
 
-	setup_sources
-fi
+chown -R "$app:$app" "$install_dir"
+chown -R "$app:$app" "$data_dir"
 
-#=================================================
-# NGINX CONFIGURATION
-#=================================================
-ynh_script_progression --message="Upgrading NGINX web server configuration..." --weight=1
-
-# Create a dedicated NGINX config
-ynh_add_nginx_config
-
-#=================================================
-# UPGRADE DEPENDENCIES
-#=================================================
-ynh_script_progression --message="Upgrading dependencies..." --weight=1
-
-install_dependencies
-
-#=================================================
-# SPECIFIC UPGRADE
 #=================================================
 # BUILD APP
 #=================================================
+ynh_script_progression --message="Compiling libheif..." --weight=70
+build_libheif
 
-if [ "$upgrade_type" == "UPGRADE_APP" ]; then
-	#=================================================
-	# BUILD LIBHEIF
-	#=================================================
-	ynh_script_progression --message="Compiling libheif..." --weight=70
+ynh_script_progression --message="Compiling Go API..." --weight=165
+build_api
 
-	build_libheif
+ynh_script_progression --message="Building static UI files..." --weight=45
+build_ui
 
-	#=================================================
-	# BUILD API
-	#=================================================
-	ynh_script_progression --message="Compiling Go API..." --weight=165
-
-	build_api
-
-	#=================================================
-	# BUILD UI
-	#=================================================
-	ynh_script_progression --message="Building static UI files..." --weight=45
-
-	build_ui
-fi
-
-#=================================================
-# SETUP SYSTEMD
-#=================================================
-ynh_script_progression --message="Upgrading systemd configuration..." --weight=1
-
-# Create a dedicated systemd config
-ynh_add_systemd_config
+cleanup_sources
 
 #=================================================
 # UPDATE A CONFIG FILE
 #=================================================
 ynh_script_progression --message="Updating a configuration file..."
 
-ynh_add_config --template=".env" --destination="$final_path/output/.env"
+ynh_add_config --template=".env" --destination="$install_dir/output/.env"
+chown "$app:$app" "$install_dir/output/.env"
 
 #=================================================
-# GENERIC FINALIZATION
+# REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
+ynh_script_progression --message="Upgrading system configurations related to $app..." --weight=1
 
-# Set permissions on app files
-set_permissions
+# Create a dedicated NGINX config
+ynh_add_nginx_config
 
-#=================================================
-# SETUP LOGROTATE
-#=================================================
-ynh_script_progression --message="Upgrading logrotate configuration..." --weight=1
+# Create a dedicated systemd config
+ynh_add_systemd_config
+yunohost service add "$app" --description="Photoview photo manager API" --log="/var/log/$app/$app.log"
 
 # Use logrotate to manage app-specific logfile(s)
 ynh_use_logrotate --non-append
 
 #=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
-
-yunohost service add $app --description="Photoview photo manager API" --log="/var/log/$app/$app.log"
-
-#=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..." --weight=1
+ynh_script_progression --message="Starting $app's systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
-
-#=================================================
-# RELOAD NGINX
-#=================================================
-ynh_script_progression --message="Reloading NGINX web server..." --weight=1
-
-ynh_systemd_action --service_name=nginx --action=reload
+ynh_systemd_action --service_name="$app" --action="start" --log_path="/var/log/$app/$app.log"
 
 #=================================================
 # END OF SCRIPT

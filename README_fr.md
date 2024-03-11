@@ -18,7 +18,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 Galerie photos simple et facile à utiliser, faite pour les photographes.
 
-**Version incluse :** 2.3.12~ynh1
+**Version incluse :** 2.3.12~ynh2
 
 **Démo :** <https://photos.qpqp.dk/>
 

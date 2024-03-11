@@ -1,6 +1,0 @@
-SOURCE_URL=https://github.com/photoview/photoview/archive/refs/tags/v2.3.12.tar.gz
-SOURCE_SUM=f9de00fb2d854217655a71264c06f8451b06b67170d3a5bbd9160fc94f1dda0f
-SOURCE_SUM_PRG=sha256sum
-SOURCE_FORMAT=tar.gz
-SOURCE_IN_SUBDIR=true
-SOURCE_FILENAME=

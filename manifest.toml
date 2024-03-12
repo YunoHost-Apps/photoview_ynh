@@ -89,7 +89,7 @@ ram.runtime = "200M"
         "libdlib-dev",
         "libdlib19",
         "libjpeg-dev",
-        "libjpeg-turbo8-dev",
+        # "libjpeg62-turbo-dev",
         "liblapack-dev",
 
         # "darktable",

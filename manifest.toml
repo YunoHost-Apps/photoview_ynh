@@ -87,6 +87,9 @@ ram.runtime = "200M"
 
     [resources.apt]
     packages = [
+        # "cmake",
+        # "ninja",
+
         "curl",
         "gpg",
         "ffmpeg",

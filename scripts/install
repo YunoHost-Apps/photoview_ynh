@@ -37,8 +37,8 @@ chown -R "$app:$app" "$data_dir"
 #=================================================
 # BUILD APP
 #=================================================
-ynh_script_progression --message="Compiling libheif..." --weight=10
-build_libheif
+# ynh_script_progression --message="Compiling libheif..." --weight=10
+# build_libheif
 
 ynh_script_progression --message="Compiling Go API..." --weight=10
 build_api

@@ -102,7 +102,7 @@ ram.runtime = "200M"
     key = "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xc6610628a707a7e5e391d27a9641080a705c2b92"
     packages = [
         "libde265-0",
-        "libde265-dev",
+        # "libde265-dev",
     ]
 
     [resources.apt.extras.strukturag_libheif]

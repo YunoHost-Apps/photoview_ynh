@@ -54,14 +54,6 @@ ram.runtime = "200M"
 
     autoupdate.strategy = "latest_github_release"
 
-    [resources.sources.libheif]
-    url = "https://github.com/strukturag/libheif/releases/download/v1.12.0/libheif-1.12.0.tar.gz"
-    sha256 = "e1ac2abb354fdc8ccdca71363ebad7503ad731c84022cf460837f0839e171718"
-
-    autoupdate.strategy = "latest_github_release"
-    autoupdate.upstream = "https://github.com/strukturag/libheif"
-    autoupdate.asset = ".*\\.tar\\.gz"
-
     [resources.system_user]
 
     [resources.install_dir]

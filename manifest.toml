@@ -54,13 +54,6 @@ ram.runtime = "200M"
 
     autoupdate.strategy = "latest_github_release"
 
-    [resources.sources.libheif]
-    url = "https://github.com/strukturag/libheif/releases/download/v1.12.0/libheif-1.12.0.tar.gz"
-    sha256 = "e1ac2abb354fdc8ccdca71363ebad7503ad731c84022cf460837f0839e171718"
-
-    autoupdate.strategy = "latest_github_release"
-    autoupdate.upstream = "https://github.com/strukturag/libheif"
-
     [resources.system_user]
 
     [resources.install_dir]
@@ -78,28 +71,40 @@ ram.runtime = "200M"
     packages = [
         "curl",
         "gpg",
-        "libdlib19",
-        "ffmpeg",
-        "exiftool",
-        "libheif1",
-        "ca-certificates",
-        "golang",
-        "libdlib-dev",
-        "libblas-dev",
-        "libatlas-base-dev",
-        "liblapack-dev",
-        "libjpeg-dev",
-        "libheif-dev",
         "build-essential",
         "pkg-config",
-        "autoconf",
-        "automake",
-        "libx265-dev",
-        "libde265-dev",
-        "libaom-dev",
+
+        "libheif1",
+        "libatlas-base-dev",
+        "libblas-dev",
+        "libdlib-dev",
+        "libdlib19",
+        "libjpeg-dev",
+        # "libjpeg62-turbo-dev",
+        "liblapack-dev",
+
+        "ffmpeg",
+        "exiftool",
         # "darktable",
 
         "mariadb-server",
+    ]
+
+    [resources.apt.extras.strukturag_libde265]
+    repo = "deb https://ppa.launchpadcontent.net/strukturag/libde265/ubuntu focal main"
+    key = "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xc6610628a707a7e5e391d27a9641080a705c2b92"
+    packages = [
+        "libde265-0",
+        "libde265-dev",
+    ]
+
+    [resources.apt.extras.strukturag_libheif]
+    repo = "deb https://ppa.launchpadcontent.net/strukturag/libheif/ubuntu focal main"
+    key = "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xc6610628a707a7e5e391d27a9641080a705c2b92"
+    packages = [
+        "libheif-dev",
+        "libaom-dev",
+        "libx265-dev",
     ]
 
     [resources.apt.extras.yarn]

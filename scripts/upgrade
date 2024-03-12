@@ -46,7 +46,6 @@ ynh_install_nodejs --nodejs_version="$node_version"
 ynh_script_progression --message="Upgrading source files..." --weight=5
 
 ynh_setup_source --dest_dir="$install_dir/sources" --full_replace=1
-ynh_setup_source --source_id=libheif --dest_dir="$install_dir/libheif" --full_replace=1
 mkdir -p "$install_dir/output/"{data,ui}
 
 chown -R "$app:$app" "$install_dir"
@@ -55,9 +54,6 @@ chown -R "$app:$app" "$data_dir"
 #=================================================
 # BUILD APP
 #=================================================
-ynh_script_progression --message="Compiling libheif..." --weight=70
-build_libheif
-
 ynh_script_progression --message="Compiling Go API..." --weight=165
 build_api
 

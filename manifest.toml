@@ -59,6 +59,7 @@ ram.runtime = "200M"
     sha256 = "e1ac2abb354fdc8ccdca71363ebad7503ad731c84022cf460837f0839e171718"
 
     autoupdate.strategy = "latest_github_release"
+    autoupdate.upstream = "https://github.com/strukturag/libheif"
 
     [resources.system_user]
 

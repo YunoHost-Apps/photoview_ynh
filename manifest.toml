@@ -98,15 +98,15 @@ ram.runtime = "200M"
     ]
 
     [resources.apt.extras.strukturag_libde265]
-    repo = "deb https://ppa.launchpadcontent.net/strukturag/libde265/ubuntu jammy main"
+    repo = "deb https://ppa.launchpadcontent.net/strukturag/libde265/ubuntu focal main"
     key = "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xc6610628a707a7e5e391d27a9641080a705c2b92"
     packages = [
         "libde265-0",
-        # "libde265-dev",
+        "libde265-dev",
     ]
 
     [resources.apt.extras.strukturag_libheif]
-    repo = "deb https://ppa.launchpadcontent.net/strukturag/libheif/ubuntu jammy main"
+    repo = "deb https://ppa.launchpadcontent.net/strukturag/libheif/ubuntu focal main"
     key = "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xc6610628a707a7e5e391d27a9641080a705c2b92"
     packages = [
         "libheif-dev",

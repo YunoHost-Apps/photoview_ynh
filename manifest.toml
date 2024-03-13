@@ -7,7 +7,7 @@ name = "Photoview"
 description.en = "Simple and user-friendly photo gallery that's made for photographers "
 description.fr = "Galerie photos simple et facile à utiliser, faite pour les photographes"
 
-version = "2.3.12~ynh2"
+version = "2.3.13~ynh1"
 
 maintainers = ["Jules Bertholet"]
 
@@ -49,8 +49,8 @@ ram.runtime = "200M"
 [resources]
     [resources.sources]
     [resources.sources.main]
-    url = "https://github.com/photoview/photoview/archive/refs/tags/v2.3.12.tar.gz"
-    sha256 = "f9de00fb2d854217655a71264c06f8451b06b67170d3a5bbd9160fc94f1dda0f"
+    url = "https://github.com/photoview/photoview/archive/refs/tags/v2.3.13.tar.gz"
+    sha256 = "d512448fbefb6c209f1900c1d4e819f22b53de3f441df84a7a96f08a10dfb064"
 
     autoupdate.strategy = "latest_github_release"
 

@@ -83,7 +83,7 @@ function build_ui {
         # ynh_exec_as "$app" env "$ynh_node_load_PATH" NODE_ENV=production "$ynh_npm" run build
     popd || ynh_die
 
-    cp -rT "$install_dir/sources/ui/build" "$install_dir/output/ui"
+    cp -rT "$install_dir/sources/ui/dist" "$install_dir/output/ui"
 }
 
 function cleanup_sources {

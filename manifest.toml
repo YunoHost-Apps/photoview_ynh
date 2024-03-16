@@ -71,17 +71,17 @@ ram.runtime = "200M"
 
     [resources.permissions]
     main.url = "/"
-    
+
     api.url = "/api"
     api.allowed = "visitors"
     api.auth_header = false
     api.protected = true
-    
+
     share.url = "/share"
     share.allowed = "visitors"
     share.auth_header = false
     share.protected = true
-    
+
     [resources.ports]
     main.default = 4001
 
@@ -108,10 +108,9 @@ ram.runtime = "200M"
         "libde265-dev",
         "libaom-dev",
         # "darktable",
-
         "mariadb-server",
     ]
-    
+
     packages_from_raw_bash = """
     if [[ $YNH_DEBIAN_VERSION == "bullseye" ]]; then
         echo "libdlib19";

@@ -40,7 +40,7 @@ Please send your pull request to the [testing branch](https://github.com/YunoHos
 
 To try the testing branch, please proceed like that.
 
-``` bash
+```bash
 sudo yunohost app install https://github.com/YunoHost-Apps/photoview_ynh/tree/testing --debug
 or
 sudo yunohost app upgrade photoview -u https://github.com/YunoHost-Apps/photoview_ynh/tree/testing --debug

@@ -49,7 +49,9 @@ function build_api {
         "LD_LIBRARY_PATH=$heif_ld_lib_path"
         "CGO_CFLAGS=$heif_cgo_cflags"
         "GOENV_VERSION=$go_version"
-        CGO_ENABLED=1
+        "CGO_ENABLED=1"
+        # workaround for issue https://github.com/strukturag/libheif/issues/523
+        "GO111MODULE=off"
     )
 
     pushd "$install_dir/sources/api" || ynh_die

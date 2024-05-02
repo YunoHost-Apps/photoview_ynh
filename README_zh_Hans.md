@@ -25,7 +25,7 @@ Photoview is a simple and user-friendly photo gallery that's made for photograph
 
 ## 截图
 
-![Photoview 的截图](./doc/screenshots/screenshot1.png)
+![Photoview 的截图](./doc/screenshots/screenshot.png)
 
 ## 文档与资源
 

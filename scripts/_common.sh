@@ -50,8 +50,6 @@ function build_api {
         "CGO_CFLAGS=$heif_cgo_cflags"
         "GOENV_VERSION=$go_version"
         "CGO_ENABLED=1"
-        # workaround for issue https://github.com/strukturag/libheif/issues/523
-        "GO111MODULE=off"
     )
 
     pushd "$install_dir/sources/api" || ynh_die
@@ -61,6 +59,7 @@ function build_api {
             sleep 5
         done
         set -e
+        ynh_exec_as "$app" env "${gobuild_env[@]}" go mod init 2>&1
         ynh_exec_as "$app" env "${gobuild_env[@]}" go install github.com/mattn/go-sqlite3 github.com/Kagami/go-face 2>&1
         ynh_exec_as "$app" env "${gobuild_env[@]}" go build -o photoview . 2>&1
     popd || ynh_die

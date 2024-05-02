@@ -77,13 +77,13 @@ function build_ui {
         ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" import 2>&1
         # ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" add husky 2>&1
         ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" install --production 2>&1
-        ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" add graphql --ignore-engines 2>&1
-        ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" run build --public-url "$path" 2>&1
+        ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" add graphql --production --ignore-engines 2>&1
+        ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" run build 2>&1
         # ynh_exec_as "$app" env "$ynh_node_load_PATH" NODE_ENV=production "$ynh_npm" install
         # ynh_exec_as "$app" env "$ynh_node_load_PATH" NODE_ENV=production "$ynh_npm" run build
     popd || ynh_die
 
-    cp -rT "$install_dir/sources/ui/build" "$install_dir/output/ui"
+    cp -rT "$install_dir/sources/ui/dist" "$install_dir/output/ui"
 }
 
 function cleanup_sources {

@@ -88,11 +88,9 @@ ram.runtime = "200M"
         "libatlas-base-dev",
         "libblas-dev",
         "libdlib-dev",
-        "libdlib19",
         "libjpeg-dev",
         # "libjpeg62-turbo-dev",
         "liblapack-dev",
-
         # "darktable",
         "mariadb-server",
     ]

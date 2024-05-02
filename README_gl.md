@@ -25,7 +25,7 @@ Photoview is a simple and user-friendly photo gallery that's made for photograph
 
 ## Capturas de pantalla
 
-![Captura de pantalla de Photoview](./doc/screenshots/screenshot1.png)
+![Captura de pantalla de Photoview](./doc/screenshots/screenshot.png)
 
 ## Documentación e recursos
 

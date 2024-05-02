@@ -25,7 +25,7 @@ Galerie photos simple et facile à utiliser, faite pour les photographes.
 
 ## Captures d’écran
 
-![Capture d’écran de Photoview](./doc/screenshots/screenshot1.png)
+![Capture d’écran de Photoview](./doc/screenshots/screenshot.png)
 
 ## Documentations et ressources
 

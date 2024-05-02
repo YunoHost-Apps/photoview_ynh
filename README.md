@@ -25,7 +25,7 @@ Photoview is a simple and user-friendly photo gallery that's made for photograph
 
 ## Screenshots
 
-![Screenshot of Photoview](./doc/screenshots/screenshot1.png)
+![Screenshot of Photoview](./doc/screenshots/screenshot.png)
 
 ## Documentation and resources
 

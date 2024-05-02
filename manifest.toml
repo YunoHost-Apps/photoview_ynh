@@ -72,14 +72,14 @@ ram.runtime = "200M"
     main.url = "/"
     
     api.url = "/api"
-    api.allow = "visitors"
+    api.allowed = "visitors"
     api.auth_header = false
-    api.protect = true
+    api.protected = true
     
     share.url = "/share"
-    share.allow = "visitors"
+    share.allowed = "visitors"
     share.auth_header = false
-    share.protect = true
+    share.protected = true
     
     [resources.ports]
     main.default = 4001

@@ -78,7 +78,6 @@ ram.runtime = "200M"
     packages = [
         "curl",
         "gpg",
-        "libdlib19",
         "ffmpeg",
         "exiftool",
         "libheif1",
@@ -101,6 +100,14 @@ ram.runtime = "200M"
 
         "mariadb-server",
     ]
+    
+    packages_from_raw_bash = """
+    if [[ $YNH_DEBIAN_VERSION == "bullseye" ]]; then
+        echo "libdlib19";
+    elif [[ $YNH_DEBIAN_VERSION == "bookworm" ]]; then
+        echo "libdlib19.1";
+    fi
+    """
 
     [resources.apt.extras.yarn]
     repo = "deb https://dl.yarnpkg.com/debian/ stable main"

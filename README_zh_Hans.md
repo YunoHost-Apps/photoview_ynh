@@ -3,7 +3,7 @@
 请勿手动编辑。
 -->
 
-# YunoHost 的 Photoview
+# YunoHost 上的 Photoview
 
 [![集成程度](https://dash.yunohost.org/integration/photoview.svg)](https://dash.yunohost.org/appci/app/photoview) ![工作状态](https://ci-apps.yunohost.org/ci/badges/photoview.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/photoview.maintain.svg)
 

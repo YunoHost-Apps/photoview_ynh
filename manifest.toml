@@ -20,7 +20,7 @@ code = "https://github.com/photoview/photoview"
 fund = "https://github.com/sponsors/viktorstrate"
 
 [integration]
-yunohost = ">= 11.2"
+yunohost = ">= 11.2.12"
 architectures = "all"
 multi_instance = true
 ldap = false

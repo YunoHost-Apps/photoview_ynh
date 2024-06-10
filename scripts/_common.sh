@@ -32,7 +32,7 @@ function build_libheif {
         ynh_exec_as "$app" mkdir build
         pushd build
             ynh_exec_and_print_stderr_only_if_error ynh_exec_as "$app" \
-                cmake --preset=release --prefix="$install_dir/local" -DWITH_GDK_PIXBUF=OFF -G Ninja ..
+                cmake --preset=release -DCMAKE_INSTALL_PREFIX="$install_dir/local" -DWITH_GDK_PIXBUF=OFF -G Ninja ..
             ynh_exec_and_print_stderr_only_if_error ynh_exec_as "$app" \
                 ninja
             ynh_exec_and_print_stderr_only_if_error ynh_exec_as "$app" \

@@ -103,7 +103,7 @@ ram.runtime = "200M"
         "build-essential",
         "pkg-config",
         "cmake",
-        "ninja",
+        "ninja-build",
         "libx265-dev",
         "libde265-dev",
         "libaom-dev",

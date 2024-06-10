@@ -60,6 +60,7 @@ ram.runtime = "200M"
 
     autoupdate.strategy = "latest_github_release"
     autoupdate.upstream = "https://github.com/strukturag/libheif"
+    autoupdate.asset = ".*\\.tar\\.gz"
 
     [resources.system_user]
 

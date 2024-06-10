@@ -29,14 +29,15 @@ function build_libheif {
     export GOCACHE="$install_dir/build/.cache"
 
     pushd "$install_dir/libheif" || ynh_die
-        # mkdir -p "$install_dir/local"
-        # chown -R $app:$app "$install_dir/local"
-        ynh_exec_as "$app" ./autogen.sh 2>&1
-        ynh_exec_as "$app" ./configure --prefix="$install_dir/local" --disable-gdk-pixbuf 2>&1
-        ynh_exec_as "$app" make clean 2>&1
-        ynh_exec_as "$app" make 2>&1
-        ynh_exec_as "$app" make install 2>&1
-        ynh_exec_as "$app" make clean 2>&1
+        mkdir build
+        pushd build
+            ynh_exec_and_print_stderr_only_if_error ynh_exec_as "$app" \
+                cmake --preset=release --prefix="$install_dir/local" -DWITH_GDK_PIXBUF=OFF -G Ninja ..
+            ynh_exec_and_print_stderr_only_if_error ynh_exec_as "$app" \
+                ninja
+            ynh_exec_and_print_stderr_only_if_error ynh_exec_as "$app" \
+                ninja install
+        popd
     popd || ynh_die
 }
 

@@ -29,7 +29,7 @@ function build_libheif {
     export GOCACHE="$install_dir/build/.cache"
 
     pushd "$install_dir/libheif" || ynh_die
-        mkdir build
+        ynh_exec_as "$app" mkdir build
         pushd build
             ynh_exec_and_print_stderr_only_if_error ynh_exec_as "$app" \
                 cmake --preset=release --prefix="$install_dir/local" -DWITH_GDK_PIXBUF=OFF -G Ninja ..

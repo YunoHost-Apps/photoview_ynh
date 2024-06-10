@@ -19,13 +19,13 @@ EZ editatu eskuz.
 Photoview is a simple and user-friendly photo gallery that's made for photographers and aims to provide an easy and fast way to navigate directories, with thousands of high resolution photos.
 
 
-**Paketatutako bertsioa:** 2.3.12~ynh2
+**Paketatutako bertsioa:** 2.3.13~ynh1
 
 **Demoa:** <https://photos.qpqp.dk/>
 
 ## Pantaila-argazkiak
 
-![Photoview(r)en pantaila-argazkia](./doc/screenshots/screenshot1.png)
+![Photoview(r)en pantaila-argazkia](./doc/screenshots/screenshot.png)
 
 ## Dokumentazioa eta baliabideak
 

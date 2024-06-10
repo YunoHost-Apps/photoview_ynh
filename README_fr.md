@@ -19,13 +19,13 @@ Il NE doit PAS être modifié à la main.
 Galerie photos simple et facile à utiliser, faite pour les photographes.
 
 
-**Version incluse :** 2.3.12~ynh2
+**Version incluse :** 2.3.13~ynh1
 
 **Démo :** <https://photos.qpqp.dk/>
 
 ## Captures d’écran
 
-![Capture d’écran de Photoview](./doc/screenshots/screenshot1.png)
+![Capture d’écran de Photoview](./doc/screenshots/screenshot.png)
 
 ## Documentations et ressources
 

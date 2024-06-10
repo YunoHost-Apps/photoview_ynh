@@ -19,13 +19,13 @@
 Photoview is a simple and user-friendly photo gallery that's made for photographers and aims to provide an easy and fast way to navigate directories, with thousands of high resolution photos.
 
 
-**分发版本：** 2.3.12~ynh2
+**分发版本：** 2.3.13~ynh1
 
 **演示：** <https://photos.qpqp.dk/>
 
 ## 截图
 
-![Photoview 的截图](./doc/screenshots/screenshot1.png)
+![Photoview 的截图](./doc/screenshots/screenshot.png)
 
 ## 文档与资源
 

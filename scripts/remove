@@ -27,7 +27,6 @@ ynh_remove_logrotate
 ynh_remove_nginx_config
 
 # Remove other various files specific to the app... such as :
-ynh_secure_remove --file="/var/log/$app"
 
 #=================================================
 # REMOVE DEPENDENCIES

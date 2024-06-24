@@ -19,7 +19,7 @@ Il NE doit PAS être modifié à la main.
 Galerie photos simple et facile à utiliser, faite pour les photographes.
 
 
-**Version incluse :** 2.3.13~ynh1
+**Version incluse :** 2.4.0~ynh1
 
 **Démo :** <https://photos.qpqp.dk/>
 

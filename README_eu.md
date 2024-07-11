@@ -5,7 +5,7 @@ EZ editatu eskuz.
 
 # Photoview YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/photoview.svg)](https://dash.yunohost.org/appci/app/photoview) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/photoview.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/photoview.maintain.svg)
+[![Integrazio maila](https://dash.yunohost.org/integration/photoview.svg)](https://ci-apps.yunohost.org/ci/apps/photoview/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/photoview.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/photoview.maintain.svg)
 
 [![Instalatu Photoview YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=photoview)
 

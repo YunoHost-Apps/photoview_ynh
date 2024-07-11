@@ -5,7 +5,7 @@ NON debe editarse manualmente.
 
 # Photoview para YunoHost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/photoview.svg)](https://dash.yunohost.org/appci/app/photoview) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/photoview.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/photoview.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/photoview.svg)](https://ci-apps.yunohost.org/ci/apps/photoview/) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/photoview.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/photoview.maintain.svg)
 
 [![Instalar Photoview con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=photoview)
 

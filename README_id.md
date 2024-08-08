@@ -19,7 +19,7 @@ Ini TIDAK boleh diedit dengan tangan.
 Photoview is a simple and user-friendly photo gallery that's made for photographers and aims to provide an easy and fast way to navigate directories, with thousands of high resolution photos.
 
 
-**Versi terkirim:** 2.4.0~ynh2
+**Versi terkirim:** 2.4.0~ynh3
 
 **Demo:** <https://photos.qpqp.dk/>
 
@@ -31,7 +31,7 @@ Photoview is a simple and user-friendly photo gallery that's made for photograph
 
 - Website aplikasi resmi: <https://photoview.github.io/>
 - Dokumentasi admin resmi: <https://photoview.github.io/docs/>
-- Repositori kode aplikasi hulu: <https://github.com/photoview/photoview>
+- Depot kode aplikasi hulu: <https://github.com/photoview/photoview>
 - Gudang YunoHost: <https://apps.yunohost.org/app/photoview>
 - Laporkan bug: <https://github.com/YunoHost-Apps/photoview_ynh/issues>
 

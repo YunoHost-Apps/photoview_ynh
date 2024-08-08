@@ -7,7 +7,7 @@ name = "Photoview"
 description.en = "Simple and user-friendly photo gallery that's made for photographers "
 description.fr = "Galerie photos simple et facile à utiliser, faite pour les photographes"
 
-version = "2.4.0~ynh2"
+version = "2.4.0~ynh3"
 
 maintainers = ["Jules Bertholet"]
 
@@ -55,8 +55,8 @@ ram.runtime = "200M"
     autoupdate.strategy = "latest_github_release"
 
     [resources.sources.libheif]
-    url = "https://github.com/strukturag/libheif/releases/download/v1.18.1/libheif-1.18.1.tar.gz"
-    sha256 = "8702564b0f288707ea72b260b3bf4ba9bf7abfa7dac01353def3a86acd6bbb76"
+    url = "https://github.com/strukturag/libheif/releases/download/v1.18.2/libheif-1.18.2.tar.gz"
+    sha256 = "c4002a622bec9f519f29d84bfdc6024e33fd67953a5fb4dc2c2f11f67d5e45bf"
 
     autoupdate.strategy = "latest_github_release"
     autoupdate.upstream = "https://github.com/strukturag/libheif"

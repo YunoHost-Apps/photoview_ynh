@@ -19,7 +19,7 @@ No se debe editar a mano.
 Photoview is a simple and user-friendly photo gallery that's made for photographers and aims to provide an easy and fast way to navigate directories, with thousands of high resolution photos.
 
 
-**Versión actual:** 2.4.0~ynh3
+**Versión actual:** 2.4.0~ynh4
 
 **Demo:** <https://photos.qpqp.dk/>
 
@@ -37,7 +37,7 @@ Photoview is a simple and user-friendly photo gallery that's made for photograph
 
 ## Información para desarrolladores
 
-Por favor enviar sus correcciones a la [`branch testing`](https://github.com/YunoHost-Apps/photoview_ynh/tree/testing
+Por favor enviar sus correcciones a la [rama `testing`](https://github.com/YunoHost-Apps/photoview_ynh/tree/testing).
 
 Para probar la rama `testing`, sigue asÍ:
 

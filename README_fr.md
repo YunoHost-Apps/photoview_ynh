@@ -5,7 +5,9 @@ Il NE doit PAS être modifié à la main.
 
 # Photoview pour YunoHost
 
-[![Niveau d’intégration](https://dash.yunohost.org/integration/photoview.svg)](https://ci-apps.yunohost.org/ci/apps/photoview/) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/photoview.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/photoview.maintain.svg)
+[![Niveau d’intégration](https://apps.yunohost.org/badge/integration/photoview)](https://ci-apps.yunohost.org/ci/apps/photoview/)
+![Statut du fonctionnement](https://apps.yunohost.org/badge/state/photoview)
+![Statut de maintenance](https://apps.yunohost.org/badge/maintained/photoview)
 
 [![Installer Photoview avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=photoview)
 
@@ -19,7 +21,7 @@ Il NE doit PAS être modifié à la main.
 Galerie photos simple et facile à utiliser, faite pour les photographes.
 
 
-**Version incluse :** 2.4.0~ynh4
+**Version incluse :** 2.4.0~ynh5
 
 **Démo :** <https://photos.qpqp.dk/>
 

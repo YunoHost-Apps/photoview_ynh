@@ -5,7 +5,9 @@ Ini TIDAK boleh diedit dengan tangan.
 
 # Photoview untuk YunoHost
 
-[![Tingkat integrasi](https://dash.yunohost.org/integration/photoview.svg)](https://ci-apps.yunohost.org/ci/apps/photoview/) ![Status kerja](https://ci-apps.yunohost.org/ci/badges/photoview.status.svg) ![Status pemeliharaan](https://ci-apps.yunohost.org/ci/badges/photoview.maintain.svg)
+[![Tingkat integrasi](https://apps.yunohost.org/badge/integration/photoview)](https://ci-apps.yunohost.org/ci/apps/photoview/)
+![Status kerja](https://apps.yunohost.org/badge/state/photoview)
+![Status pemeliharaan](https://apps.yunohost.org/badge/maintained/photoview)
 
 [![Pasang Photoview dengan YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=photoview)
 
@@ -19,7 +21,7 @@ Ini TIDAK boleh diedit dengan tangan.
 Photoview is a simple and user-friendly photo gallery that's made for photographers and aims to provide an easy and fast way to navigate directories, with thousands of high resolution photos.
 
 
-**Versi terkirim:** 2.4.0~ynh4
+**Versi terkirim:** 2.4.0~ynh5
 
 **Demo:** <https://photos.qpqp.dk/>
 

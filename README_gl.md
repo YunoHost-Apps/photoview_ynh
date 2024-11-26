@@ -5,7 +5,9 @@ NON debe editarse manualmente.
 
 # Photoview para YunoHost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/photoview.svg)](https://ci-apps.yunohost.org/ci/apps/photoview/) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/photoview.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/photoview.maintain.svg)
+[![Nivel de integración](https://apps.yunohost.org/badge/integration/photoview)](https://ci-apps.yunohost.org/ci/apps/photoview/)
+![Estado de funcionamento](https://apps.yunohost.org/badge/state/photoview)
+![Estado de mantemento](https://apps.yunohost.org/badge/maintained/photoview)
 
 [![Instalar Photoview con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=photoview)
 
@@ -19,7 +21,7 @@ NON debe editarse manualmente.
 Photoview is a simple and user-friendly photo gallery that's made for photographers and aims to provide an easy and fast way to navigate directories, with thousands of high resolution photos.
 
 
-**Versión proporcionada:** 2.4.0~ynh4
+**Versión proporcionada:** 2.4.0~ynh5
 
 **Demo:** <https://photos.qpqp.dk/>
 

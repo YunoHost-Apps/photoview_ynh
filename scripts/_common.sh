@@ -75,7 +75,7 @@ function build_ui {
         ynh_replace_string -m "cd .. && " -r "" -f "package.json"
         # chown -R "$app:$app" $install_dir
         ynh_exec_as "$app" touch ".yarnrc"
-        ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" import 2>&1
+        ynh_exec_as "$app" env "$ynh_node_load_PATH" NODE_ENV=production yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" import 2>&1
         # ynh_exec_as "$app" env "$ynh_node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" add husky 2>&1
         ynh_exec_as "$app" env "$ynh_node_load_PATH" NODE_ENV=production yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" install 2>&1
         ynh_exec_as "$app" env "$ynh_node_load_PATH" NODE_ENV=production yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" add graphql --ignore-engines 2>&1

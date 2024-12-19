@@ -15,11 +15,13 @@ ynh_script_progression --message="Installing Go..." --weight=10
 ynh_install_go --go_version="$go_version"
 
 #=================================================
-# INSTALL NODEJS
+# INSTALL NODEJS AND YARN
 #=================================================
 ynh_script_progression --message="Installing NodeJS..." --weight=10
 
 ynh_install_nodejs --nodejs_version="$node_version"
+
+corepack enable
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

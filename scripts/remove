@@ -31,11 +31,11 @@ ynh_remove_nginx_config
 #=================================================
 # REMOVE DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Removing Go..." --weight=5
-ynh_remove_go
+#REMOVEME? ynh_script_progression --message="Removing Go..." --weight=5
+#REMOVEME? ynh_remove_go
 
-ynh_script_progression --message="Removing NodeJS..." --weight=5
-ynh_remove_nodejs
+#REMOVEME? ynh_script_progression --message="Removing NodeJS..." --weight=5
+#REMOVEME? ynh_remove_nodejs
 
 #=================================================
 # END OF SCRIPT

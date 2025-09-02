@@ -4,7 +4,7 @@
 # COMMON VARIABLES
 #=================================================
 
-go_version=1.20
+#REMOVEME? go_version=1.20
 node_version=16
 
 #=================================================
@@ -12,7 +12,7 @@ node_version=16
 #=================================================
 
 function set_go_vars {
-    ynh_use_go
+    #REMOVEME? ynh_use_go
 
     export GOPATH="$install_dir/build/go"
     export GOCACHE="$install_dir/build/.cache"
@@ -69,7 +69,7 @@ function build_api {
 }
 
 function build_ui {
-    ynh_use_nodejs
+    #REMOVEME? ynh_use_nodejs
 
     pushd "$install_dir/sources/ui" || ynh_die
         ynh_replace_string -m "cd .. && " -r "" -f "package.json"

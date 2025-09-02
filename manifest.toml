@@ -20,7 +20,7 @@ code = "https://github.com/photoview/photoview"
 fund = "https://github.com/sponsors/viktorstrate"
 
 [integration]
-yunohost = ">= 11.2.12"
+yunohost = ">= 12.1.17"
 architectures = "all"
 multi_instance = true
 ldap = false
@@ -126,3 +126,6 @@ ram.runtime = "200M"
 
     [resources.database]
     type = "mysql"
+
+    [resources.go]
+    version = "1.20"

@@ -10,16 +10,16 @@ source /usr/share/yunohost/helpers
 #=================================================
 # INSTALL GO
 #=================================================
-ynh_script_progression --message="Installing Go..." --weight=10
+#REMOVEME? ynh_script_progression --message="Installing Go..." --weight=10
 
-ynh_install_go --go_version="$go_version"
+#REMOVEME? ynh_install_go --#REMOVEME? go_version="$go_version"
 
 #=================================================
 # INSTALL NODEJS
 #=================================================
-ynh_script_progression --message="Installing NodeJS..." --weight=10
+#REMOVEME? ynh_script_progression --message="Installing NodeJS..." --weight=10
 
-ynh_install_nodejs --nodejs_version="$node_version"
+#REMOVEME? ynh_install_nodejs --#REMOVEME? nodejs_version="$node_version"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

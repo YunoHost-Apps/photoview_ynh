@@ -10,43 +10,30 @@ source /usr/share/yunohost/helpers
 #=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Stopping $app's systemd service..." --weight=1
+ynh_script_progression "Stopping $app's systemd service..."
 
-ynh_systemd_action --service_name="$app" --action="stop" --log_path="/var/log/$app/$app.log"
+ynh_systemctl --service="$app" --action="stop"
 
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
-ynh_script_progression --message="Ensuring downward compatibility..."
+ynh_script_progression "Ensuring downward compatibility..."
 
 if [ ! -d "$install_dir/sources" ]; then
     # Final cleanup...
-    ynh_secure_remove --file="$install_dir"
+    ynh_safe_rm "$install_dir"
     mkdir -p "$install_dir"
     chmod 750 "$install_dir"
 fi
 
 #=================================================
-# INSTALL GO
-#=================================================
-ynh_script_progression --message="Upgrading Go..." --weight=10
-
-ynh_install_go --go_version="$go_version"
-
-#=================================================
-# INSTALL NODEJS
-#=================================================
-ynh_script_progression --message="Upgrading NodeJS..." --weight=10
-
-ynh_install_nodejs --nodejs_version="$node_version"
-
-#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_script_progression --message="Upgrading source files..." --weight=5
+ynh_script_progression "Upgrading source files..."
 
-ynh_setup_source --dest_dir="$install_dir/sources" --full_replace=1
-ynh_setup_source --source_id=libheif --dest_dir="$install_dir/libheif" --full_replace=1
+ynh_setup_source --dest_dir="$install_dir/sources" --full_replace
+ynh_setup_source --source_id=libheif --dest_dir="$install_dir/libheif" --full_replace
+
 mkdir -p "$install_dir/output/"{data,ui}
 
 chown -R "$app:$app" "$install_dir"
@@ -55,13 +42,13 @@ chown -R "$app:$app" "$data_dir"
 #=================================================
 # BUILD APP
 #=================================================
-ynh_script_progression --message="Compiling libheif..." --weight=70
+ynh_script_progression "Compiling libheif..."
 build_libheif
 
-ynh_script_progression --message="Compiling Go API..." --weight=165
+ynh_script_progression "Compiling Go API..."
 build_api
 
-ynh_script_progression --message="Building static UI files..." --weight=45
+ynh_script_progression "Building static UI files..."
 build_ui
 
 cleanup_sources
@@ -69,35 +56,34 @@ cleanup_sources
 #=================================================
 # UPDATE A CONFIG FILE
 #=================================================
-ynh_script_progression --message="Updating a configuration file..."
+ynh_script_progression "Updating configuration..."
 
-ynh_add_config --template=".env" --destination="$install_dir/output/.env"
-chown "$app:$app" "$install_dir/output/.env"
+ynh_config_add --template=".env" --destination="$install_dir/output/.env"
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression --message="Upgrading system configurations related to $app..." --weight=1
+ynh_script_progression "Upgrading system configurations related to $app..."
 
 # Create a dedicated NGINX config
-ynh_add_nginx_config
+ynh_config_add_nginx
 
 # Create a dedicated systemd config
-ynh_add_systemd_config
+ynh_config_add_systemd
 yunohost service add "$app" --description="Photoview photo manager API" --log="/var/log/$app/$app.log"
 
 # Use logrotate to manage app-specific logfile(s)
-ynh_use_logrotate --non-append
+ynh_config_add_logrotate
 
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting $app's systemd service..." --weight=1
+ynh_script_progression "Starting $app's systemd service..."
 
-ynh_systemd_action --service_name="$app" --action="start" --log_path="/var/log/$app/$app.log"
+ynh_systemctl --service="$app" --action="start"
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Upgrade of $app completed" --last
+ynh_script_progression "Upgrade of $app completed"

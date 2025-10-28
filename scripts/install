@@ -17,6 +17,9 @@ ynh_setup_source --source_id=libheif --dest_dir="$install_dir/libheif"
 
 mkdir -p "$install_dir/output/"{data,ui}
 
+chown -R "$app:$app" "$install_dir"
+chown -R "$app:$app" "$data_dir"
+
 #=================================================
 # BUILD APP
 #=================================================

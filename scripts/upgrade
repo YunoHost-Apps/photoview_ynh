@@ -33,7 +33,11 @@ ynh_script_progression "Upgrading source files..."
 
 ynh_setup_source --dest_dir="$install_dir/sources" --full_replace
 ynh_setup_source --source_id=libheif --dest_dir="$install_dir/libheif" --full_replace
+
 mkdir -p "$install_dir/output/"{data,ui}
+
+chown -R "$app:$app" "$install_dir"
+chown -R "$app:$app" "$data_dir"
 
 #=================================================
 # BUILD APP

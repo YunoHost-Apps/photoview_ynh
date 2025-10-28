@@ -66,13 +66,13 @@ function build_ui {
         ynh_replace -m "cd .. && " -r "" -f "package.json"
         chown -R "$app:$app" $install_dir
         ynh_exec_as_app touch ".yarnrc"
-        ynh_exec_as_app node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" import 2>&1
-        # ynh_exec_as_app node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" add husky 2>&1
-        ynh_exec_as_app node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" install --production 2>&1
-        ynh_exec_as_app node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" add graphql --production --ignore-engines 2>&1
-        ynh_exec_as_app node_load_PATH" yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" run build 2>&1
-        # ynh_exec_as_app node_load_PATH" NODE_ENV=production npm install
-        # ynh_exec_as_app node_load_PATH" NODE_ENV=production npm run build
+        ynh_exec_as_app yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" import 2>&1
+        # ynh_exec_as_app yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" add husky 2>&1
+        ynh_exec_as_app yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" install --production 2>&1
+        ynh_exec_as_app yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" add graphql --production --ignore-engines 2>&1
+        ynh_exec_as_app yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" run build 2>&1
+        # ynh_exec_as_app NODE_ENV=production npm install
+        # ynh_exec_as_app NODE_ENV=production npm run build
     popd || ynh_die
 
     cp -rT "$install_dir/sources/ui/dist" "$install_dir/output/ui"

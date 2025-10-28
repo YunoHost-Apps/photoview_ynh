@@ -9,7 +9,7 @@ function set_go_vars {
     export GOPATH="$install_dir/build/go"
     export GOCACHE="$install_dir/build/.cache"
 
-    go_shims_path=$goenv_install_dir/shims
+    go_shims_path=$go_dir/shims
     go_path_full="$go_shims_path":"$(ynh_exec_as_app bash -c 'echo $PATH')"
     heif_lib_path="$install_dir/local/lib":"$(ynh_exec_as_app bash -c 'echo $LIBRARY_PATH')"
     heif_ld_lib_path="$install_dir/local/lib":"$(ynh_exec_as_app bash -c 'echo $LD_LIBRARY_PATH')"

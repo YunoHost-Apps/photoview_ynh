@@ -12,7 +12,7 @@ Simple and user-friendly photo gallery that's made for photographers
 
 [![🌐 Official app website](https://img.shields.io/badge/Official_app_website-darkgreen?style=for-the-badge)](https://photoview.github.io/)
 [![App Demo](https://img.shields.io/badge/App_Demo-blue?style=for-the-badge)](https://photos.qpqp.dk/)
-[![Version: 2.4.0~ynh10](https://img.shields.io/badge/Version-2.4.0~ynh10-rgba(0,150,0,1)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/photoview/)
+[![Version: 2.4.0~ynh10](https://img.shields.io/badge/Version-2.4.0~ynh10-rgb(18,138,11)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/photoview/)
 
 <div align="center">
 <a href="https://apps.yunohost.org/app/photoview"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_more_info_on_the_appstore.svg"/></a>

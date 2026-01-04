@@ -125,7 +125,7 @@ ram.runtime = "200M"
     type = "mysql"
 
     [resources.nodejs]
-    version = "20"
+    version = "16"
 
     [resources.go]
     version = "1.20"

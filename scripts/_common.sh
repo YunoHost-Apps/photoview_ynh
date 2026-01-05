@@ -66,7 +66,7 @@ function build_ui {
         ynh_replace -m "cd .. && " -r "" -f "package.json"
         chown -R "$app:$app" $install_dir
         corepack enable
-        ynh_hide_warnings corepack prepare  yarn@latest --activate
+        ynh_hide_warnings corepack prepare  yarn@4.12 --activate
         ynh_exec_as_app touch ".yarnrc"
         ynh_exec_as_app yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" import 2>&1
         # ynh_exec_as_app yarn --cache-folder "./yarn-cache" --use-yarnrc ".yarnrc" add husky 2>&1

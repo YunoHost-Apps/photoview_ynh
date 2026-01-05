@@ -97,7 +97,6 @@ ram.runtime = "200M"
         "golang",
         "libdlib-dev",
         "libblas-dev",
-        "libatlas-base-dev",
         "liblapack-dev",
         "libjpeg-dev",
         "libheif-dev",
@@ -116,14 +115,11 @@ ram.runtime = "200M"
     if [[ $YNH_DEBIAN_VERSION == "bullseye" ]]; then
         echo "libdlib19";
     elif [[ $YNH_DEBIAN_VERSION == "bookworm" ]]; then
-        echo "libdlib19.1";
+        echo "libdlib19.1 libatlas-base-dev";
+    elif [[ $YNH_DEBIAN_VERSION == "trixie" ]]; then
+        echo "libdlib19.2";
     fi
     """
-
-    [resources.apt.extras.yarn]
-    repo = "deb https://dl.yarnpkg.com/debian/ stable main"
-    key = "https://dl.yarnpkg.com/debian/pubkey.gpg"
-    packages = "yarn"
 
     [resources.database]
     type = "mysql"

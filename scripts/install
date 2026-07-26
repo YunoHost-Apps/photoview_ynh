@@ -16,7 +16,7 @@ ynh_setup_source --dest_dir="$install_dir/sources"
 
 # Add prebuilt libvips with HEIC support
 ynh_print_info "Adding prebuilt libvips with HEIC support..."
-ynh_setup_source --source_id="vips_prebuilt_$YNH_DEBIAN_VERSION" --dest_dir="$install_dir/vips" --full_replace=1
+ynh_setup_source --source_id="vips_prebuilt_$YNH_DEBIAN_VERSION" --dest_dir="$install_dir/vips"
 export LD_LIBRARY_PATH="$install_dir/vips/lib:${LD_LIBRARY_PATH:-}"
 export PKG_CONFIG_PATH="$install_dir/vips/lib/pkgconfig:${PKG_CONFIG_PATH:-}"
 
@@ -44,6 +44,7 @@ pushd $install_dir/sources/api
     export GOPATH="$install_dir/build/go"
 	export GOCACHE="$install_dir/build/.cache"
 
+    ynh_hide_warnings ynh_exec_as_app CGO_ENABLED=1 go mod download
     ynh_hide_warnings ynh_exec_as_app CGO_ENABLED=1 go build -v -o photoview .
 popd
 

@@ -93,7 +93,6 @@ ram.runtime = "200M"
         "ffmpeg",
         "libheif1",
         "ca-certificates",
-        "golang",
         "libdlib-dev",
         "libblas-dev",
         "liblapack-dev",

@@ -37,7 +37,7 @@ pushd $install_dir/sources/api
 
     ynh_hide_warnings ynh_exec_as_app CGO_ENABLED=1 go mod download
     ynh_hide_warnings ynh_exec_as_app CGO_ENABLED=1 go install github.com/mattn/go-sqlite3 github.com/Kagami/go-face
-    ynh_hide_warnings ynh_exec_as_app CGO_ENABLED=1 go build -v -o photoview .
+    ynh_hide_warnings ynh_exec_as_app CGO_ENABLED=1 go build -o photoview .
 popd
 
 ynh_script_progression "Building static UI files..."

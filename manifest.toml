@@ -50,8 +50,8 @@ ram.runtime = "200M"
 [resources]
     [resources.sources]
     [resources.sources.main]
-    url = "https://github.com/photoview/photoview/archive/refs/tags/v2.4.0.tar.gz"
-    sha256 = "954d1640a1eaef145bdcb3fc6b7e2478cfd05f6709a9a2955c83bb3666b49b62"
+    url = "https://github.com/photoview/photoview/archive/517072890629c20ff9a0484703833799a70eed7a.tar.gz"
+    sha256 = "cdd33d8aec4d953988bd3707ab69b8f48e5b013a299dacb82fa0d4d9a8919762"
 
     autoupdate.strategy = "latest_github_release"
 
@@ -125,7 +125,7 @@ ram.runtime = "200M"
     type = "mysql"
 
     [resources.nodejs]
-    version = "16"
+    version = "18"
 
     [resources.go]
     version = "1.20"

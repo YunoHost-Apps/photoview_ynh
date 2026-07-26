@@ -11,26 +11,10 @@ function set_go_vars {
 
     go_shims_path=$go_dir/shims
     go_path_full="$go_shims_path":"$(ynh_exec_as_app bash -c 'echo $PATH')"
-    heif_lib_path="$install_dir/local/lib":"$(ynh_exec_as_app bash -c 'echo $LIBRARY_PATH')"
-    heif_ld_lib_path="$install_dir/local/lib":"$(ynh_exec_as_app bash -c 'echo $LD_LIBRARY_PATH')"
-    heif_cgo_cflags="-I$install_dir/local/include"
-}
 
-function build_libheif {
-    export GOPATH="$install_dir/build/go"
-    export GOCACHE="$install_dir/build/.cache"
-
-    pushd "$install_dir/libheif" || ynh_die
-        ynh_exec_as_app mkdir build
-        pushd build
-            ynh_exec_and_print_stderr_only_if_error ynh_exec_as_app \
-                cmake --preset=release -DCMAKE_INSTALL_PREFIX="$install_dir/local" -DWITH_GDK_PIXBUF=OFF -G Ninja ..
-            ynh_exec_and_print_stderr_only_if_error ynh_exec_as_app \
-                ninja
-            ynh_exec_and_print_stderr_only_if_error ynh_exec_as_app \
-                ninja install
-        popd
-    popd || ynh_die
+    heif_lib_path="$install_dir/vips/lib":"$(ynh_exec_as_app bash -c 'echo $LIBRARY_PATH')"
+    heif_ld_lib_path="$install_dir/vips/lib":"$(ynh_exec_as_app bash -c 'echo $LD_LIBRARY_PATH')"
+    heif_cgo_cflags="-I$install_dir/vips/include"
 }
 
 function build_api {
@@ -81,7 +65,6 @@ function build_ui {
 }
 
 function cleanup_sources {
-    ynh_safe_rm "$install_dir/libheif"
     ynh_safe_rm "$install_dir/sources"
     ynh_safe_rm "$install_dir/go"
     ynh_safe_rm "$install_dir/.cache/go-build"

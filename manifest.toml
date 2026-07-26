@@ -55,13 +55,17 @@ ram.runtime = "200M"
 
     autoupdate.strategy = "latest_github_release"
 
-    [resources.sources.libheif]
-    url = "https://github.com/strukturag/libheif/releases/download/v1.21.2/libheif-1.21.2.tar.gz"
-    sha256 = "75f530b7154bc93e7ecf846edfc0416bf5f490612de8c45983c36385aa742b42"
+    [resources.sources.vips_prebuilt_bookworm]
+	url = "https://github.com/Thovi98/test/releases/download/vips-8.18.4-heif-1.23.1/vips-8.18.4-heif-1.23.1-bookworm.tar.gz"
+	sha256 = "e958339824ed395cc4f7c4096fe570952c0fb32082391c2b96c23926373c8f3c"
 
     autoupdate.strategy = "latest_github_release"
-    autoupdate.upstream = "https://github.com/strukturag/libheif"
-    autoupdate.asset = ".*\\.tar\\.gz"
+
+	[resources.sources.vips_prebuilt_trixie]
+	url = "https://github.com/Thovi98/test/releases/download/vips-8.18.4-heif-1.23.1/vips-8.18.4-heif-1.23.1-trixie.tar.gz"
+	sha256 = "e4914a41a2b1b138565a334d6085179ceb47db1ff209b4cb284b50f0eea63307"
+
+    autoupdate.strategy = "latest_github_release"
 
     [resources.system_user]
 
@@ -100,8 +104,6 @@ ram.runtime = "200M"
         "libheif-dev",
         "build-essential",
         "pkg-config",
-        "cmake",
-        "ninja-build",
         "libx265-dev",
         "libde265-dev",
         "libaom-dev",

@@ -15,7 +15,6 @@ ynh_script_progression "Setting up source files..."
 ynh_setup_source --dest_dir="$install_dir/sources"
 
 # Add prebuilt libvips with HEIC support
-ynh_print_info "Adding prebuilt libvips with HEIC support..."
 ynh_setup_source --source_id="vips_prebuilt_$YNH_DEBIAN_VERSION" --dest_dir="$install_dir/vips"
 export LD_LIBRARY_PATH="$install_dir/vips/lib:${LD_LIBRARY_PATH:-}"
 export PKG_CONFIG_PATH="$install_dir/vips/lib/pkgconfig:${PKG_CONFIG_PATH:-}"

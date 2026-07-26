@@ -106,7 +106,9 @@ ram.runtime = "200M"
         "libde265-dev",
         "libaom-dev",
         # "darktable",
+        "imagemagick",
         "libmagic-dev",
+        "libmagickcore-dev",
         "libmagickwand-dev",
         "mariadb-server",
     ]

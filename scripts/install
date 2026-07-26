@@ -28,14 +28,6 @@ chown -R "$app:$app" "$data_dir"
 # BUILD APP
 #=================================================
 
-ynh_script_progression "Building static UI files..."
-#build_ui
-
-pushd $install_dir/sources/ui
-    ynh_hide_warnings ynh_exec_as_app npm install
-	ynh_hide_warnings ynh_exec_as_app npm run build
-popd
-
 ynh_script_progression "Compiling Go API..."
 #build_api
 
@@ -48,9 +40,17 @@ pushd $install_dir/sources/api
     ynh_hide_warnings ynh_exec_as_app CGO_ENABLED=1 go build -v -o photoview .
 popd
 
-cp -rT "$install_dir/sources/ui/dist" "$install_dir/output/ui"
+ynh_script_progression "Building static UI files..."
+#build_ui
+
+pushd $install_dir/sources/ui
+    ynh_hide_warnings ynh_exec_as_app npm install
+	ynh_hide_warnings ynh_exec_as_app npm run build
+popd
+
 cp -T "$install_dir/sources/api/photoview" "$install_dir/output/photoview"
 cp -rT "$install_dir/sources/api/data" "$install_dir/output/data"
+cp -rT "$install_dir/sources/ui/dist" "$install_dir/output/ui"
 
 cleanup_sources
 

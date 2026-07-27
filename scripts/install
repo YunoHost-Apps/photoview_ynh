@@ -32,8 +32,11 @@ ynh_script_progression "Compiling Go API..."
 #build_api
 
 pushd $install_dir/sources/api
+    export GOMODCACHE="$install_dir/build/go/pkg/mod"
     export GOPATH="$install_dir/build/go"
-	export GOCACHE="$install_dir/build/.cache"
+    export GOCACHE="$install_dir/build/.cache"
+    export GOTOOLCHAIN=local
+
 
     ynh_hide_warnings ynh_exec_as_app CGO_ENABLED=1 go mod download
    # ynh_hide_warnings ynh_exec_as_app CGO_ENABLED=1 sed -i 's/-lcblas//g' $(go env GOMODCACHE)/github.com/\!kagami/go-face*/face.go #go install github.com/mattn/go-sqlite3 github.com/Kagami/go-face

@@ -98,6 +98,7 @@ ram.runtime = "200M"
         "ca-certificates",
         "libdlib-dev",
         "libblas-dev",
+		"libopenblas-dev",
         "liblapack-dev",
         "libjpeg-dev",
         "build-essential",

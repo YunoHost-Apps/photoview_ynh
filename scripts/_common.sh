@@ -69,3 +69,43 @@ function cleanup_sources {
     ynh_safe_rm "$install_dir/go"
     ynh_safe_rm "$install_dir/.cache/go-build"
 }
+
+tools_prefix="$install_dir/dependencies"
+
+# Path for the service to retrieve the Calibre tools
+path_with_imagemagick="$tools_prefix/bin:$PATH"
+
+install_imagemagick() {
+    ynh_setup_source --source_id="imagemagickv7" --dest_dir="$install_dir/imagemagick_source"
+    mkdir -p "$tools_prefix"
+    chown -R "$app:$app" "$install_dir/imagemagick_source" "$tools_prefix"
+
+    pushd "$install_dir/imagemagick_source"
+        ynh_exec_as_app CFLAGS="-O2 -I$tools_prefix/include -Wno-deprecated-declarations" \
+            ./configure \
+            --prefix="$tools_prefix" \
+            --enable-static \
+            --enable-bounds-checking \
+            --enable-hdri \
+            --enable-hugepages \
+            --with-threads \
+            --with-modules \
+            --with-quantum-depth=16 \
+            --without-magick-plus-plus \
+            --with-bzlib \
+            --with-zlib \
+            --without-autotrace \
+            --with-freetype \
+            --with-jpeg \
+            --without-lcms \
+            --with-lzma \
+            --with-png \
+            --with-tiff \
+            --with-heic \
+            --with-rsvg \
+            --with-webp
+        ynh_exec_as_app make all -j"$(nproc)"
+        ynh_exec_as_app LIBTOOLFLAGS=-Wnone make install
+    popd
+    ynh_safe_rm "$install_dir/imagemagick_source"
+}

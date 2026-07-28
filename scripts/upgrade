@@ -27,6 +27,19 @@ if [ ! -d "$install_dir/sources" ]; then
 fi
 
 #=================================================
+# INSTALL DEPENDENCIES
+#=================================================
+ynh_script_progression "Installing dependencies..."
+
+# Building and installing ImageMagick v7
+install_imagemagick
+
+# Add prebuilt libvips with HEIC support
+ynh_setup_source --source_id="vips_prebuilt_$YNH_DEBIAN_VERSION" --dest_dir="$install_dir/vips"
+export LD_LIBRARY_PATH="$install_dir/vips/lib:${LD_LIBRARY_PATH:-}"
+export PKG_CONFIG_PATH="$install_dir/vips/lib/pkgconfig:${PKG_CONFIG_PATH:-}"
+
+#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression "Upgrading source files..."

@@ -67,6 +67,13 @@ ram.runtime = "200M"
 
     autoupdate.strategy = "latest_github_release"
 
+    [resources.sources.imagemagickv7]
+    url = "https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-13.tar.gz"
+    sha256 = "3617bffe497690ffe5b731227d026db1150e138ddb129481a1e202442e558512"
+
+    autoupdate.strategy = "latest_github_tag"
+    autoupdate.upstream = "https://github.com/ImageMagick/ImageMagick"
+
     [resources.system_user]
 
     [resources.install_dir]

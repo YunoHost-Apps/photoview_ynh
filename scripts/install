@@ -8,16 +8,24 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# DOWNLOAD, CHECK AND UNPACK SOURCE
+# INSTALL DEPENDENCIES
 #=================================================
-ynh_script_progression "Setting up source files..."
+ynh_script_progression "Installing dependencies..."
 
-ynh_setup_source --dest_dir="$install_dir/sources"
+# Building and installing ImageMagick v7
+install_imagemagick
 
 # Add prebuilt libvips with HEIC support
 ynh_setup_source --source_id="vips_prebuilt_$YNH_DEBIAN_VERSION" --dest_dir="$install_dir/vips"
 export LD_LIBRARY_PATH="$install_dir/vips/lib:${LD_LIBRARY_PATH:-}"
 export PKG_CONFIG_PATH="$install_dir/vips/lib/pkgconfig:${PKG_CONFIG_PATH:-}"
+
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
+#=================================================
+ynh_script_progression "Setting up source files..."
+
+ynh_setup_source --dest_dir="$install_dir/sources"
 
 mkdir -p "$install_dir/output/"{data,ui}
 
